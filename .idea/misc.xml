@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable-ldltr/button_home.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable-ldltr/ic_calendar.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable-ldltr/ic_person.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable-ldltr/ic_profile.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable-ldltr/rectangle_round.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/button_danger.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/button_home.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_appointement.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_person.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/rectangle_round.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/font/amita.xml" value="0.396875" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout-v21/fragment_doctor_profile.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_about.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_doctor_profile.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_homepage.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_patient_signin.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_patient_signup.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_signin.xml" value="0.28306159420289856" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_signup.xml" value="0.28306159420289856" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

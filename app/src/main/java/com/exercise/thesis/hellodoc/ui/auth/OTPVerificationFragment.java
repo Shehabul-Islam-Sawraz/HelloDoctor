@@ -92,7 +92,10 @@ public class OTPVerificationFragment extends Fragment {
                             progressBar.setVisibility(View.GONE);
                             verifyButton.setVisibility(View.VISIBLE);
                             if(task.isSuccessful()){
-                                Navigation.findNavController(view).navigate(R.id.action_OTPVerificationFragment_to_homepageFragment);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("mbl_num", mobileNumber.getText().toString());
+                                getParentFragmentManager().setFragmentResult("OTPVerify", bundle);
+                                Navigation.findNavController(view).navigate(R.id.action_OTPVerificationFragment_to_patientSigninFragment);
                             }
                             else{
                                 Toast.makeText(getContext(), "The verification code entered was invalid", Toast.LENGTH_SHORT).show();

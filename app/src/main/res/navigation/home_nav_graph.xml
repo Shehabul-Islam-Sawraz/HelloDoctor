@@ -115,9 +115,8 @@
         android:label="fragment_o_t_p_verification"
         tools:layout="@layout/fragment_o_t_p_verification" >
         <action
-            android:id="@+id/action_OTPVerificationFragment_to_homepageFragment"
-            app:destination="@id/homepageFragment"
-            app:popUpTo="@id/home_nav_graph" />
+            android:id="@+id/action_OTPVerificationFragment_to_patientSigninFragment"
+            app:destination="@id/patientSigninFragment" />
     </fragment>
     <fragment
         android:id="@+id/patientAuthFragment"
@@ -127,6 +126,27 @@
         <action
             android:id="@+id/action_patientAuthFragment_to_OTPVerificationFragment"
             app:destination="@id/OTPVerificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/patientSigninFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.auth.PatientSigninFragment"
+        android:label="fragment_patient_signin"
+        tools:layout="@layout/fragment_patient_signin" >
+        <action
+            android:id="@+id/action_patientSigninFragment_to_homepageFragment"
+            app:destination="@id/homepageFragment" />
+        <action
+            android:id="@+id/action_patientSigninFragment_to_patientSignupFragment"
+            app:destination="@id/patientSignupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/patientSignupFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.auth.PatientSignupFragment"
+        android:label="fragment_patient_signup"
+        tools:layout="@layout/fragment_patient_signup" >
+        <action
+            android:id="@+id/action_patientSignupFragment_to_homepageFragment"
+            app:destination="@id/homepageFragment" />
     </fragment>
 
 </navigation>
