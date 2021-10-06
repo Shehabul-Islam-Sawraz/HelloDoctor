@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "173351810457",
+    "project_id": "hellodoctor-a3399",
+    "storage_bucket": "hellodoctor-a3399.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:173351810457:android:b3b40991350785370f4f08",
+        "android_client_info": {
+          "package_name": "com.exercise.thesis.hellodoc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "173351810457-anjd9jfvtqbtmbd3r6emu2oeqictj003.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.exercise.thesis.hellodoc",
+            "certificate_hash": "fe1cf35f884ca32a33e86ff73e4477b285b3ecc7"
+          }
+        },
+        {
+          "client_id": "173351810457-vg4pi3ndqrt5470pol02gd92jovei1np.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjDesdK5gVZxr1wdMhVEMNBevtdQtEv48"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "173351810457-vg4pi3ndqrt5470pol02gd92jovei1np.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

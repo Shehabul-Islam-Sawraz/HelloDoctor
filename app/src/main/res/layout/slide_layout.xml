@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/about_app_image"
+        android:layout_width="180dp"
+        android:layout_height="210dp"
+        android:src="@drawable/emergency1"
+        android:layout_centerInParent="true">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/about_app_image_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/about_app_image"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:text="Consult Text"
+        android:paddingTop="25dp"
+        android:paddingBottom="5dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/black">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/about_app_image_text"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/about_app_image_heading"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:text="You can consult"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#808080">
+
+    </TextView>
+
+</RelativeLayout>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@id/splashscreenFragment">
+
+    <fragment
+        android:id="@+id/splashscreenFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.auth.SplashscreenFragment"
+        android:label="fragment_splashscreen"
+        tools:layout="@layout/fragment_splashscreen" >
+        <action
+            android:id="@+id/action_splashscreenFragment_to_welcomeFragment"
+            app:destination="@id/confirmationFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_in"
+            app:popUpTo="@id/home_nav_graph" />
+        <action
+            android:id="@+id/action_splashscreenFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_in"
+            app:popUpTo="@id/home_nav_graph" />
+        <action
+            android:id="@+id/action_splashscreenFragment_to_homepageFragment"
+            app:destination="@id/homepageFragment"
+            app:popUpTo="@id/home_nav_graph" />
+        <action
+            android:id="@+id/action_splashscreenFragment_to_doctorProfileFragment"
+            app:destination="@id/doctorProfileFragment"
+            app:popUpTo="@id/home_nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmationFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.auth.ConfirmationFragment"
+        android:label="Welcome"
+        tools:layout="@layout/fragment_confirmation">
+        <action
+            android:id="@+id/action_welcomeFragment_to_signinFragment"
+            app:destination="@id/signinFragment"
+            app:popUpTo="@id/confirmationFragment"
+            app:enterAnim="@anim/zoomout"
+            app:exitAnim="@anim/fade_in"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
+        <action
+            android:id="@+id/action_confirmationFragment_to_patientAuthFragment"
+            app:destination="@id/patientAuthFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.auth.SignupFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_signupFragment_to_doctorProfileFragment"
+            app:destination="@id/doctorProfileFragment"
+            app:popUpTo="@id/home_nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/signinFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.auth.SigninFragment"
+        android:label="fragment_signin"
+        tools:layout="@layout/fragment_signin" >
+        <action
+            android:id="@+id/action_signinFragment_to_signupFragment"
+            app:destination="@id/signupFragment"
+            app:popUpTo="@id/signinFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_signinFragment_to_doctorProfileFragment"
+            app:destination="@id/doctorProfileFragment"
+            app:popUpTo="@id/home_nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/doctorProfileFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.doctor.DoctorProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_doctor_profile">
+        <action
+            android:id="@+id/action_doctorProfileFragment_to_welcomeFragment"
+            app:destination="@id/confirmationFragment"
+            app:popUpTo="@id/home_nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/homepageFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.home.HomepageFragment"
+        android:label="fragment_homepage"
+        tools:layout="@layout/fragment_homepage" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.AboutApp.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" >
+        <action
+            android:id="@+id/action_aboutFragment_to_welcomeFragment"
+            app:destination="@id/confirmationFragment"
+            app:popUpTo="@id/home_nav_graph"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_in"/>
+    </fragment>
+    <fragment
+        android:id="@+id/OTPVerificationFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.auth.OTPVerificationFragment"
+        android:label="fragment_o_t_p_verification"
+        tools:layout="@layout/fragment_o_t_p_verification" >
+        <action
+            android:id="@+id/action_OTPVerificationFragment_to_homepageFragment"
+            app:destination="@id/homepageFragment"
+            app:popUpTo="@id/home_nav_graph" />
+    </fragment>
+    <fragment
+        android:id="@+id/patientAuthFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.auth.PatientAuthFragment"
+        android:label="fragment_patient_auth"
+        tools:layout="@layout/fragment_patient_auth" >
+        <action
+            android:id="@+id/action_patientAuthFragment_to_OTPVerificationFragment"
+            app:destination="@id/OTPVerificationFragment" />
+    </fragment>
+
+</navigation>
