@@ -1,18 +1,28 @@
 package com.exercise.thesis.hellodoc.model;
 
+import android.net.Uri;
+
 public class Doctor {
     private String fullName;
-    private String userName;
     private String email;
+    private String phoneNum;
+    private String address;
+    private String specialities;
+    private Uri image;
+    private String about;
 
     public Doctor() {
 
     }
 
-    public Doctor(String fullName, String userName, String email) {
+    public Doctor(String fullName, String email, String address,Uri image) {
         this.fullName = fullName;
-        this.userName = userName;
+        this.address = address;
         this.email = email;
+        this.phoneNum = "";
+        this.specialities = "";
+        this.image = null;
+        this.about = "";
     }
 
     public String getFullName() {
@@ -23,14 +33,6 @@ public class Doctor {
         this.fullName = fullName;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -39,11 +41,50 @@ public class Doctor {
         this.email = email;
     }
 
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getSpecialities() {
+        return specialities;
+    }
+
+    public void setSpecialities(String specialities) {
+        this.specialities = specialities;
+    }
+
+    public Uri getImage() {
+        return image;
+    }
+
+    public void setImage(Uri image) {
+        this.image = image;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
     @Override
     public String toString() {
         return "Doctor{" +
                 "fullName='" + fullName + '\'' +
-                ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }

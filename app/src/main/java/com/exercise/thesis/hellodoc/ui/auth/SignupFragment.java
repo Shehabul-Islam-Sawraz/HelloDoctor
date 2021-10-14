@@ -28,7 +28,7 @@ public class SignupFragment extends Fragment {
     Button registerButton;
     Button returnToLogin;
     EditText fullName;
-    EditText username;
+    EditText hospital;
     EditText password;
     EditText confirmPassword;
     EditText email;
@@ -52,7 +52,7 @@ public class SignupFragment extends Fragment {
         registerButton = view.findViewById(R.id.register);
         returnToLogin = view.findViewById(R.id.returnToLogin);
         fullName = view.findViewById(R.id.fullName);
-        username = view.findViewById(R.id.username);
+        hospital = view.findViewById(R.id.hospitalAddress);
         password = view.findViewById(R.id.signup_password);
         confirmPassword = view.findViewById(R.id.signup_confirm_password);
         email = view.findViewById(R.id.signup_email);
@@ -82,7 +82,7 @@ public class SignupFragment extends Fragment {
             public void afterTextChanged(Editable s) {
                 String error = authViewModel.checkPassword(password.getText().toString());
                 if (!fullName.getText().toString().isEmpty() &&
-                        !username.getText().toString().isEmpty() &&
+                        !hospital.getText().toString().isEmpty() &&
                         !email.getText().toString().isEmpty() &&
                         error.equals("")) {
                     registerButton.setEnabled(true);
@@ -107,8 +107,8 @@ public class SignupFragment extends Fragment {
                 authViewModel.register(
                         email.getText().toString(),
                         fullName.getText().toString(),
-                        username.getText().toString(),
-                        password.getText().toString());
+                        password.getText().toString(),
+                        hospital.getText().toString());
             }
         });
 

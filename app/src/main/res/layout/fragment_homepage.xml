@@ -50,7 +50,7 @@ tools:context=".ui.home.HomepageFragment">
 </LinearLayout>
 
     <Button
-        android:id="@+id/btnRequst"
+        android:id="@+id/btnRequest"
         android:layout_width="105dp"
         android:layout_height="96dp"
         android:layout_marginTop="81dp"

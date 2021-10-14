@@ -48,10 +48,15 @@ public class SigninFragment extends Fragment {
 
         doctorAuthViewModel = new ViewModelProvider(requireActivity()).get(DoctorAuthViewModel.class);
         isLoginComplete.observe(getViewLifecycleOwner(), aBoolean -> {
-            if (aBoolean == true)
+            if (aBoolean == true){
                 Navigation.findNavController(view).navigate(R.id.action_signinFragment_to_doctorProfileFragment);
+            }
+            else{
+                Toast.makeText(getActivity(), "Log In Failed!!", Toast.LENGTH_SHORT).show();
+            }
             //Toast.makeText(getActivity(), "ISTRUE OBSVR", Toast.LENGTH_SHORT).show();
         });
+
 
         doctorAuthViewModel.getFirebaseUserMutableLiveData().observe(getViewLifecycleOwner(), firebaseUser -> {
             if (firebaseUser != null) {

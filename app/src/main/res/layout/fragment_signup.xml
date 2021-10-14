@@ -37,7 +37,7 @@
         android:importantForAutofill="no"/>
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/hospitalAddress"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_below="@+id/fullName"
@@ -45,19 +45,19 @@
         android:layout_marginBottom="15sp"
         android:background="#11000000"
         android:ems="10"
-        android:hint="  Username"
+        android:hint="  Hospital"
+        android:importantForAutofill="no"
         android:inputType="text"
         android:selectAllOnFocus="true"
         android:textColor="@color/white"
         android:textColorHint="@color/colorMoreTransparentWhite"
-        android:textSize="23sp"
-        android:importantForAutofill="no"/>
+        android:textSize="23sp" />
 
     <EditText
         android:id="@+id/signup_email"
         android:layout_width="320dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/username"
+        android:layout_below="@+id/hospitalAddress"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15sp"
         android:background="#11000000"

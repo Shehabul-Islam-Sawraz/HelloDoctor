@@ -10,19 +10,35 @@
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable-ldltr/rectangle_round.xml" value="0.3828125" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/button_danger.xml" value="0.3828125" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/button_home.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/circle.xml" value="0.3828125" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_appointement.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_arrow_back_black_24dp.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_camera_alt_black_24dp.xml" value="0.3828125" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_person.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_search_white.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/img.xml" value="0.3828125" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/rectangle_round.xml" value="0.3828125" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/font/amita.xml" value="0.396875" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout-v21/fragment_doctor_profile.xml" value="0.36666666666666664" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_about.xml" value="0.36666666666666664" />
-        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_doctor_profile.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_about_doctor.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_doctor_profile.xml" value="0.33" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_edit_doctor_profile.xml" value="0.3383838383838384" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_homepage.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_o_t_p_verification.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_patient_auth.xml" value="0.36666666666666664" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_patient_signin.xml" value="0.36666666666666664" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_patient_signup.xml" value="0.36666666666666664" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_signin.xml" value="0.28306159420289856" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_signup.xml" value="0.28306159420289856" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_splashscreen.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/nav_header.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/slide_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/menu/menu_bar.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/menu/navigation_bar.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/menu/top_app_bar.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3828125" />
       </map>
     </option>
   </component>

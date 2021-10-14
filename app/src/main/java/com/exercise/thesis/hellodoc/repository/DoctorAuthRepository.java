@@ -49,33 +49,80 @@ public class DoctorAuthRepository {
     }
 
     public void signIn(String email, String password) {
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                // Sign in success, update UI with the signed-in user's information
-                Log.d(TAG, "signInWithEmail:success");
-                firebaseUser.postValue(firebaseAuth.getCurrentUser());
-            } else {
-                // If sign in fails, display a message to the user.
-                Toast.makeText(application, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                Log.w(TAG, "signInWithEmail:failure", task.getException());
-            }
-        });
-    }
-    public void register(String email, String fullName, String userName, String password) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                firebaseUser.postValue(firebaseAuth.getCurrentUser());
-                Doctor doctor = new Doctor(fullName, userName, email);
-                reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(doctor);
-                Toast.makeText(application, "Sign Up successful!", Toast.LENGTH_SHORT).show();
-            } else {
-                if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                    Toast.makeText(application, "User already exists!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(application, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+        ValueEventListener findAcc = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(searchAccount(snapshot,email)){
+                    firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                        //Toast.makeText(application, firebaseAuth.getCurrentUser().toString(), Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful()){
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            firebaseUser.postValue(firebaseAuth.getCurrentUser());
+                        }else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(application, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                        }
+                    });
+                }
+                else {
+                    Toast.makeText(application, "No account exists with this email!!", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        reference.addListenerForSingleValueEvent(findAcc);
+
+    }
+
+    private boolean searchAccount(DataSnapshot snapshot, String email) {
+        if(snapshot.exists()){
+            for(DataSnapshot ds:snapshot.getChildren()){
+                if(ds.child("email").getValue(String.class).equals(email)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void register(String email, String fullName, String password, String address) {
+        ValueEventListener findAcc = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(searchAccount(snapshot,email)){
+                    Toast.makeText(application, "User already exists!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            firebaseUser.postValue(firebaseAuth.getCurrentUser());
+                            Doctor doctor = new Doctor(fullName, email, address,firebaseAuth.getCurrentUser().getPhotoUrl());
+                            reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(doctor);
+                            Toast.makeText(application, "Sign Up successful!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                Toast.makeText(application, "User already exists!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(application, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        reference.addListenerForSingleValueEvent(findAcc);
+
     }
 
     public MutableLiveData<FirebaseUser> getFirebaseUser() {

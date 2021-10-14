@@ -89,6 +89,9 @@
             android:id="@+id/action_doctorProfileFragment_to_welcomeFragment"
             app:destination="@id/confirmationFragment"
             app:popUpTo="@id/home_nav_graph" />
+        <action
+            android:id="@+id/action_doctorProfileFragment_to_aboutDoctorFragment"
+            app:destination="@id/aboutDoctorFragment" />
     </fragment>
     <fragment
         android:id="@+id/homepageFragment"
@@ -147,6 +150,27 @@
         <action
             android:id="@+id/action_patientSignupFragment_to_homepageFragment"
             app:destination="@id/homepageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutDoctorFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.doctor.AboutDoctorFragment"
+        android:label="fragment_about_doctor"
+        tools:layout="@layout/fragment_about_doctor" >
+        <action
+            android:id="@+id/action_aboutDoctorFragment_to_doctorProfileFragment"
+            app:destination="@id/doctorProfileFragment" />
+        <action
+            android:id="@+id/action_aboutDoctorFragment_to_editDoctorProfile"
+            app:destination="@id/editDoctorProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/editDoctorProfile"
+        android:name="com.exercise.thesis.hellodoc.ui.doctor.EditDoctorProfile"
+        android:label="fragment_edit_doctor_profile"
+        tools:layout="@layout/fragment_edit_doctor_profile" >
+        <action
+            android:id="@+id/action_editDoctorProfile_to_aboutDoctorFragment"
+            app:destination="@id/aboutDoctorFragment" />
     </fragment>
 
 </navigation>

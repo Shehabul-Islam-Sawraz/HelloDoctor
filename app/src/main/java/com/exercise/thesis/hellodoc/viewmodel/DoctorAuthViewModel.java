@@ -27,8 +27,8 @@ public class DoctorAuthViewModel extends AndroidViewModel {
     }
 
 
-    public void register(String email, String fullName, String userName, String password) {
-        authRepository.register(email, fullName, userName, password);
+    public void register(String email, String fullName, String password, String address) {
+        authRepository.register(email, fullName, password, address);
     }
 
     public void signIn(String email, String password) {

@@ -70,13 +70,13 @@ tools:context=".ui.doctor.DoctorProfileFragment">
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-    android:id="@+id/btnRequst"
+    android:id="@+id/btnRequest"
     android:layout_width="118dp"
     android:layout_height="107dp"
     android:layout_marginTop="32dp"
     android:layout_marginBottom="237dp"
     android:background="@drawable/button_home"
-    android:text="Appointement"
+    android:text="Appointment"
     android:textColor="#22BE87"
     android:textSize="16sp"
     android:textAllCaps="false"
@@ -91,13 +91,13 @@ tools:context=".ui.doctor.DoctorProfileFragment">
     app:layout_constraintVertical_bias="0.0" />
 
 <Button
-    android:id="@+id/appointement"
+    android:id="@+id/appointment"
     android:layout_width="118dp"
     android:layout_height="107dp"
     android:layout_marginTop="168dp"
     android:layout_marginBottom="98dp"
     android:background="@drawable/button_home"
-    android:text=" Patient Request"
+    android:text=" Patient Requests"
     android:textColor="#22BE87"
     android:textSize="14sp"
     android:fontFamily="@font/roboto"
@@ -170,25 +170,6 @@ tools:context=".ui.doctor.DoctorProfileFragment">
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/home_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="162dp"
-            android:layout_marginLeft="162dp"
-            android:layout_marginEnd="163dp"
-            android:layout_marginRight="163dp"
-            android:layout_marginBottom="130dp"
-            android:gravity="center"
-            android:text="Home"
-            android:textColor="#ffffff"
-            android:textSize="32sp" />
-
-        <TextView
             android:id="@+id/doctorName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -197,7 +178,7 @@ tools:context=".ui.doctor.DoctorProfileFragment">
             android:layout_alignParentBottom="true"
             android:layout_marginStart="109dp"
             android:layout_marginLeft="109dp"
-            android:layout_marginBottom="81dp"
+            android:layout_marginBottom="96dp"
             android:text="Welcome Doctor"
             android:textColor="#ffffff"
             android:textSize="26sp" />
@@ -211,7 +192,7 @@ tools:context=".ui.doctor.DoctorProfileFragment">
             android:layout_centerHorizontal="true"
             android:layout_marginStart="105dp"
             android:layout_marginLeft="105dp"
-            android:layout_marginBottom="55dp"
+            android:layout_marginBottom="70dp"
             android:text="How we can help you today?"
             android:textColor="#ffffff"
             android:textSize="16sp" />
