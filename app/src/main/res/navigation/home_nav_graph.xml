@@ -92,6 +92,9 @@
         <action
             android:id="@+id/action_doctorProfileFragment_to_aboutDoctorFragment"
             app:destination="@id/aboutDoctorFragment" />
+        <action
+            android:id="@+id/action_doctorProfileFragment_to_doctorCalendarFragment"
+            app:destination="@id/doctorCalendarFragment" />
     </fragment>
     <fragment
         android:id="@+id/homepageFragment"
@@ -172,5 +175,10 @@
             android:id="@+id/action_editDoctorProfile_to_aboutDoctorFragment"
             app:destination="@id/aboutDoctorFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/doctorCalendarFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.doctor.DoctorCalendarFragment"
+        android:label="fragment_doctor_calendar"
+        tools:layout="@layout/fragment_doctor_calendar" />
 
 </navigation>

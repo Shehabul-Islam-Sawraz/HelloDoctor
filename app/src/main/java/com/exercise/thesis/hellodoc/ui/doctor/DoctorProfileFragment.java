@@ -56,7 +56,7 @@ public class DoctorProfileFragment extends Fragment{
         //((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         this.database = FirebaseDatabase.getInstance();
         this.reference = database.getReference("doctor");
-        Common.CurrentDoctor = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+        Common.CurrentDoctor = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         Common.CurrentUserType = "doctor";
         listPatients = view.findViewById(R.id.listPatients);
         BtnRequest=view.findViewById(R.id.btnRequest);
@@ -112,7 +112,7 @@ public class DoctorProfileFragment extends Fragment{
         });
 
         myCalendarBtn.setOnClickListener(v->{
-            Navigation.findNavController(view).navigate(R.id.action_doctorProfileFragment_to_aboutDoctorFragment);
+            Navigation.findNavController(view).navigate(R.id.action_doctorProfileFragment_to_doctorCalendarFragment);
         });
 
     }

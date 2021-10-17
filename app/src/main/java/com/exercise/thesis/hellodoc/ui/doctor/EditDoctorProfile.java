@@ -32,6 +32,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.exercise.thesis.hellodoc.R;
+import com.exercise.thesis.hellodoc.common.Common;
 import com.exercise.thesis.hellodoc.model.Doctor;
 import com.exercise.thesis.hellodoc.model.Image;
 import com.google.android.gms.tasks.Continuation;
@@ -260,6 +261,7 @@ public class EditDoctorProfile extends Fragment {
             public void onSuccess(Void unused) {
                 //Toast.makeText(getActivity(), name + "." + address + "." + phone + "." + email + "." + spe, Toast.LENGTH_SHORT).show();
                 Toast.makeText(getActivity(), "Profile Updated Successfully!!", Toast.LENGTH_SHORT).show();
+                Common.CurrentDoctor = email;
                 Navigation.findNavController(viewThis).navigate(R.id.action_editDoctorProfile_to_aboutDoctorFragment);
             }
         }).addOnFailureListener(new OnFailureListener() {

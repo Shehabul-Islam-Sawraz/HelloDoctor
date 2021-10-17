@@ -3,14 +3,14 @@ package com.exercise.thesis.hellodoc.viewmodel;
 public class TimeSlot {
     private Long slot;
     private String type ;
-    private String chemin;
+    private String chain;
 
-    public String getChemin() {
-        return chemin;
+    public String getChain() {
+        return chain;
     }
 
-    public void setChemin(String chemin) {
-        this.chemin = chemin;
+    public void setChain(String chain) {
+        this.chain = chain;
     }
 
     public String getType() {
