@@ -57,9 +57,6 @@ public class AboutDoctorFragment extends Fragment {
     private DatabaseReference imgReference;
     private View viewThis;
     private Uri profilePhoto = null;
-    final String doctorID = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    DocumentReference docRef = db.collection("Doctor").document("" + doctorID + "");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -146,31 +143,6 @@ public class AboutDoctorFragment extends Fragment {
 
             }
         });
-
-        //Toast.makeText(getActivity(), profilePhoto.toString(), Toast.LENGTH_SHORT).show();
-
-        //display profile image
-        //String imageId = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
-        //Toast.makeText(getActivity(), "profile: "+profilePhoto, Toast.LENGTH_SHORT).show();
-        /*if(profilePhoto!=null){
-            //Toast.makeText(getActivity(), "Eikhane ashche", Toast.LENGTH_SHORT).show();
-            Picasso.with(getActivity())
-                    .load(profilePhoto.toString())
-                    .placeholder(R.mipmap.ic_launcher)
-                    .fit()
-                    .centerCrop()
-                    .into(doctorImage, new Callback() {
-                        @Override
-                        public void onSuccess() {
-                            //dialog.dismiss();
-                        }
-
-                        @Override
-                        public void onError() {
-                            Toast.makeText(getActivity(), "Profile photo load error!!", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }*/
 
         // Find the toolbar view inside the activity layout
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);

@@ -1,11 +1,14 @@
 package com.exercise.thesis.hellodoc.ui.doctor;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,9 +29,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class DoctorProfileFragment extends Fragment{
+import java.util.Calendar;
+
+public class DoctorProfileFragment extends Fragment implements DatePickerDialog.OnDateSetListener{
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    private View viewThis;
 
     static String doc;
     Button signOutBtn2;
@@ -56,6 +62,7 @@ public class DoctorProfileFragment extends Fragment{
         //((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         this.database = FirebaseDatabase.getInstance();
         this.reference = database.getReference("doctor");
+        this.viewThis = view;
         Common.CurrentDoctor = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         Common.CurrentUserType = "doctor";
         listPatients = view.findViewById(R.id.listPatients);
@@ -115,65 +122,16 @@ public class DoctorProfileFragment extends Fragment{
             Navigation.findNavController(view).navigate(R.id.action_doctorProfileFragment_to_doctorCalendarFragment);
         });
 
-    }
-
-
-
-
-
-
-
-/*  Unbinder unbinder;
-
-    @OnClick(R.id.myCalendarBtn)
-    void myCalendarOnclick() {
-        Toast.makeText(this,"clicked",Toast.LENGTH_SHORT).show();
-        Intent k = new Intent(DoctorHomeActivity.this, MyCalendarDoctorActivity.class);
-        startActivity(k);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_doctor_home); //ici layout de page d'acceuil MEDECIN
-        unbinder = ButterKnife.bind(this,this);
-        Common.CurreentDoctor = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
-        Common.CurrentUserType = "doctor";
-        listPatients = findViewById(R.id.listPatients);
-        BtnRequst=findViewById(R.id.btnRequst);
-        SignOutBtn2=findViewById(R.id.signOutBtn);
-        appointementBtn = findViewById(R.id.appointement);
-        SignOutBtn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
+        BtnRequest.setOnClickListener(v->{
+            Navigation.findNavController(view).navigate(R.id.action_doctorProfileFragment_to_confirmedAppointmentFragment);
         });
-        BtnRequst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent k = new Intent(DoctorHomeActivity.this, ConfirmedAppointmensActivity.class);
-                startActivity(k);
-            }
+
+        listPatients.setOnClickListener(v->{
+            Navigation.findNavController(view).navigate(R.id.action_doctorProfileFragment_to_myPatientsFragment);
         });
-        listPatients.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent k = new Intent(DoctorHomeActivity.this, MyPatientsActivity.class);
-                startActivity(k);
-            }
-        });
-        appointementBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // doc = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
-                //showDatePickerDialog(v.getContext());
-                Intent k = new Intent(DoctorHomeActivity.this, DoctorAppointementActivity.class);
-                startActivity(k);
-            }
+
+        appointmentBtn.setOnClickListener(v-> {
+            Navigation.findNavController(view).navigate(R.id.action_doctorProfileFragment_to_doctorAppointmentFragment);
         });
 
     }
@@ -189,19 +147,20 @@ public class DoctorProfileFragment extends Fragment{
     }
 
     @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        String date = "month_day_year: " + month + "_" + dayOfMonth + "_" + year;
-        openPage(view.getContext(),doc,date);
+    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+        String date = "month_day_year: " + i1 + "_" + i2 + "_" + i;
+        openPage(datePicker.getContext(),doc,date);
     }
 
-    private void openPage(Context wf, String d,String day){
-        Intent i = new Intent(wf, AppointementActivity.class);
-        i.putExtra("key1",d+"");
-        i.putExtra("key2",day);
-        i.putExtra("key3","doctor");
-        wf.startActivity(i);
+    private void openPage(Context wf, String d, String day){
+        Bundle bundle = new Bundle();
+        bundle.putString("key1", d+"");
+        bundle.putString("key2", day);
+        bundle.putString("key3", "doctor");
+        getParentFragmentManager().setFragmentResult("dataFromProfile", bundle);
+        Navigation.findNavController(viewThis).navigate(R.id.action_doctorProfileFragment_to_appointmentFragment);
     }
-*/
+
 
 
 }

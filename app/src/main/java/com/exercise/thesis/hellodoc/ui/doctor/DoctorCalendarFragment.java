@@ -98,15 +98,6 @@ public class DoctorCalendarFragment extends Fragment implements ITimeSlotLoadLis
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.DATE,5);
 
-        /*calendarView.setMinDate(startDate.getTimeInMillis());
-        calendarView.setMaxDate(endDate.getTimeInMillis());
-        Calendar c = Calendar.getInstance();
-        c.setTime(startDate.getTime());
-        c.set(Calendar.DAY_OF_MONTH,1);
-        Calendar calen = new Calendar.Builder(view, calendarView)*/
-
-
-
         HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(getActivity(),R.id.calendarView2)
                 .range(startDate,endDate)
                 .datesNumberOnScreen(1)
@@ -139,51 +130,6 @@ public class DoctorCalendarFragment extends Fragment implements ITimeSlotLoadLis
 
             }
         });
-
-        /*doctorDoc = FirebaseFirestore.getInstance()
-                .collection("Doctor")
-                .document(Common.CurrentDoctor);
-        doctorDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful())
-                {
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    if(documentSnapshot.exists()){
-                        CollectionReference date =FirebaseFirestore.getInstance()
-                                .collection("Doctor")
-                                .document(Common.CurrentDoctor)
-                                .collection(bookDate);
-
-                        date.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful())
-                                {
-                                    QuerySnapshot querySnapshot = task.getResult();
-                                    if (querySnapshot.isEmpty())
-                                    {
-                                        iTimeSlotLoadListener.onTimeSlotLoadEmpty();
-                                    }else {
-                                        List<TimeSlot> timeSlots = new ArrayList<>();
-                                        for (QueryDocumentSnapshot document:task.getResult())
-                                            timeSlots.add(document.toObject(TimeSlot.class));
-                                        iTimeSlotLoadListener.onTimeSlotLoadSuccess(timeSlots);
-                                    }
-
-                                }
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                iTimeSlotLoadListener.onTimeSlotLoadFailed(e.getMessage());
-                            }
-                        });
-                    }
-                }
-            }
-        });*/
-
 
         bookDateReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(bookDate).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override

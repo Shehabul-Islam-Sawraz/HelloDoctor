@@ -4,6 +4,11 @@ public class Patient {
     private String fullName;
     private String email;
     private String mblNum;
+    private String dateAffected;
+    private String situationFamiliar;
+    private String weight;
+    private String height;
+    private String bloodType;
 
     public Patient() {
 
@@ -13,6 +18,11 @@ public class Patient {
         this.fullName = fullName;
         this.email = email;
         this.mblNum = mblNum;
+        this.dateAffected = "";
+        this.situationFamiliar = "";
+        this.weight = "";
+        this.height = "";
+        this.bloodType = "";
     }
 
     public String getFullName() {
@@ -37,6 +47,46 @@ public class Patient {
 
     public void setMblNum(String mblNum) {
         this.mblNum = mblNum;
+    }
+
+    public String getSituationFamiliar() {
+        return situationFamiliar;
+    }
+
+    public void setSituationFamiliar(String situationFamiliar) {
+        this.situationFamiliar = situationFamiliar;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getDateAffected() {
+        return dateAffected;
+    }
+
+    public void setDateAffected(String dateAffected) {
+        this.dateAffected = dateAffected;
+    }
+
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
     }
 
     @Override

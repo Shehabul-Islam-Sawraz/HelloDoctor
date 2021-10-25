@@ -95,6 +95,18 @@
         <action
             android:id="@+id/action_doctorProfileFragment_to_doctorCalendarFragment"
             app:destination="@id/doctorCalendarFragment" />
+        <action
+            android:id="@+id/action_doctorProfileFragment_to_confirmedAppointmentFragment"
+            app:destination="@id/confirmedAppointmentFragment" />
+        <action
+            android:id="@+id/action_doctorProfileFragment_to_myPatientsFragment"
+            app:destination="@id/myPatientsFragment" />
+        <action
+            android:id="@+id/action_doctorProfileFragment_to_appointmentFragment"
+            app:destination="@id/appointmentFragment" />
+        <action
+            android:id="@+id/action_doctorProfileFragment_to_doctorAppointmentFragment"
+            app:destination="@id/doctorAppointmentFragment" />
     </fragment>
     <fragment
         android:id="@+id/homepageFragment"
@@ -180,5 +192,25 @@
         android:name="com.exercise.thesis.hellodoc.ui.doctor.DoctorCalendarFragment"
         android:label="fragment_doctor_calendar"
         tools:layout="@layout/fragment_doctor_calendar" />
+    <fragment
+        android:id="@+id/confirmedAppointmentFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.doctor.ConfirmedAppointmentFragment"
+        android:label="fragment_confirmed_appointment"
+        tools:layout="@layout/fragment_confirmed_appointment" />
+    <fragment
+        android:id="@+id/myPatientsFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.doctor.MyPatientsFragment"
+        android:label="fragment_my_patients"
+        tools:layout="@layout/fragment_my_patients" />
+    <fragment
+        android:id="@+id/appointmentFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.doctor.AppointmentFragment"
+        android:label="fragment_appointment"
+        tools:layout="@layout/fragment_appointment" />
+    <fragment
+        android:id="@+id/doctorAppointmentFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.doctor.DoctorAppointmentFragment"
+        android:label="fragment_doctor_appointment"
+        tools:layout="@layout/fragment_doctor_appointment" />
 
 </navigation>

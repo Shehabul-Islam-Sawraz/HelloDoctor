@@ -9,6 +9,9 @@
         android:maxSdkVersion="28"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <permission android:name="android.permission.CALL_PRIVILEGED"
+        android:protectionLevel="signature|privileged" />
 
     <application
         android:allowBackup="true"

@@ -132,29 +132,17 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
                             appointmentInformation.setAppointmentType(Common.CurrentAppointmentType);
                             appointmentInformation.setDoctorId(Common.CurrentDoctor);
                             appointmentInformation.setDoctorName(Common.CurrentDoctorName);
-                            appointmentInformation.setChain("Doctor/"+Common.CurrentDoctor+"/"+Common.simpleFormat.format(Common.currentDate.getTime())+"/"+String.valueOf(Common.currentTimeSlot));
+                            appointmentInformation.setChain("bookdate/"+Common.CurrentDoctor+"/"+Common.simpleFormat.format(Common.currentDate.getTime())+"/"+String.valueOf(Common.currentTimeSlot));
                             appointmentInformation.setType("full");
                             appointmentInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
                                     .append("at")
                                     .append(simpleDateFormat.format(Common.currentDate.getTime())).toString());
                             appointmentInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
 
-////////////////////////
-                            /*DocumentReference bookingDate = FirebaseFirestore.getInstance()
-                                    .collection("Doctor")
-                                    .document(Common.CurrentDoctor)
-                                    .collection(Common.simpleFormat.format(Common.currentDate.getTime()))
-                                    .document(String.valueOf(Common.currentTimeSlot));
-
-                            bookingDate.set(appointmentInformation);*/
-
-
-
                             TimeSlot slot = new TimeSlot();
                             slot.setSlot((long)Common.currentTimeSlot);
                             slot.setType("full");
                             slot.setChain("Doctor/"+Common.CurrentDoctor+"/"+Common.simpleFormat.format(Common.currentDate.getTime())+"/"+String.valueOf(Common.currentTimeSlot));
-
                             appointmentInformation.setTimeSlot(slot);
 
                             bookDateReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(Common.simpleFormat.format(Common.currentDate.getTime())).
@@ -165,22 +153,17 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
                     });
 
                     alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
-
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
                             dialog.dismiss();
                         }
                     });
-
                     alert.show();
 
                 }
             }
         });
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -190,7 +173,6 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView txt_time_slot,txt_time_slot_description;
         CardView card_time_slot;
-
         IRecyclerItemSelectedListener iRecyclerItemSelectedListener;
 
         public void setRecyclerItemSelectedListener(IRecyclerItemSelectedListener iRecyclerItemSelectedListener) {

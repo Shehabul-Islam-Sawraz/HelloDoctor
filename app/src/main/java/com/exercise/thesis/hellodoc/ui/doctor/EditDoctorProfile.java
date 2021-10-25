@@ -233,25 +233,6 @@ public class EditDoctorProfile extends Fragment {
 
     /* Update the doctor info in the database */
     private void updateDoctorInfo(String name, String address, String phone, String email, String spe, String about) {
-        /*DocumentReference documentReference = doctorRef.collection("Doctor").document("" + doctorID + "");
-        documentReference.update("adresse", address);
-        //documentReference.update("email", email);
-        documentReference.update("name", name);
-        documentReference.update("tel", phone)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(EditProfileDoctorActivity.this, "Infos Updated", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(EditProfileDoctorActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                        Log.d("Androidview", e.getMessage());
-                    }
-                });*/
-
         Doctor doc = new Doctor(name,email,address,uriImage);
         doc.setAbout(about);
         doc.setPhoneNum(phone);
@@ -270,8 +251,6 @@ public class EditDoctorProfile extends Fragment {
                 Toast.makeText(getActivity(), "Can't update profile successfully!!", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 
 
@@ -287,11 +266,6 @@ public class EditDoctorProfile extends Fragment {
 
             if (permission != PackageManager.PERMISSION_GRANTED) {
                 // If don't have permission so prompt the user.
-                /*this.requestPermissions(
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        MY_REQUEST_CODE_PERMISSION
-                );*/
-
                 requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE);
                 requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
             }
@@ -300,15 +274,6 @@ public class EditDoctorProfile extends Fragment {
     }
 
     private void doBrowseFile()  {
-        /*Intent chooseFileIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        chooseFileIntent.setType("image/*");
-        // Only return URIs that can be opened with ContentResolver
-        chooseFileIntent.addCategory(Intent.CATEGORY_OPENABLE);
-
-        chooseFileIntent = Intent.createChooser(chooseFileIntent, "Choose a file");
-        startActivityForResult(chooseFileIntent, MY_RESULT_CODE_FILECHOOSER);*/
-
-
         getPhoto.launch("image/*");
     }
     private void uploadImageToFirebase(Uri uri){
@@ -350,97 +315,4 @@ public class EditDoctorProfile extends Fragment {
         MimeTypeMap mp = MimeTypeMap.getSingleton();
         return mp.getExtensionFromMimeType(cr.getType(uri));
     }
-
-
-
-
-
-
-
-    // When you have the request results
-    /*@Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        //
-        switch (requestCode) {
-            case MY_REQUEST_CODE_PERMISSION: {
-
-                // Note: If request is cancelled, the result arrays are empty.
-                // Permissions granted (CALL_PHONE).
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    Log.i(LOG_TAG,"Permission granted!");
-                    Toast.makeText(this.getContext(), "Permission granted!", Toast.LENGTH_SHORT).show();
-
-                    this.doBrowseFile();
-                }
-                // Cancelled or denied.
-                else {
-                    Log.i(LOG_TAG,"Permission denied!");
-                    Toast.makeText(this.getContext(), "Permission denied!", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            }
-        }
-    }*/
-
-
-    /*@Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case MY_RESULT_CODE_FILECHOOSER:
-                if (resultCode == Activity.RESULT_OK ) {
-                    if(data != null)  {
-                        Uri fileUri = data.getData();
-                        Log.i(LOG_TAG, "Uri: " + fileUri);
-
-                        String filePath = null;
-                        try {
-                            filePath = FileUtils.getPath(this.getContext(),fileUri);
-                        } catch (Exception e) {
-                            Log.e(LOG_TAG,"Error: " + e);
-                            Toast.makeText(this.getContext(), "Error: " + e, Toast.LENGTH_SHORT).show();
-                        }
-                        this.editTextPath.setText(filePath);
-                    }
-                }
-                break;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }*/
-
-
-
-
-
-
-    /* Used to choose a file */
-    /*private void openFileChooser() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, PICK_IMAGE_REQUEST);
-    }*/
-
-
-
-
-    /* used to get the data back */
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null) {
-            uriImage = data.getData();
-            Picasso.with(this).load(uriImage).into(profileImage);
-        }
-    }*/
-
-
-
-
 }
