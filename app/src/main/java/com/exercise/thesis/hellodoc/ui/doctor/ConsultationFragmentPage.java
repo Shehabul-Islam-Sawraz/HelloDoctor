@@ -50,7 +50,7 @@ public class ConsultationFragmentPage extends Fragment {
 
     private void setUpRecyclerView() {
 
-        String email_id = getActivity().getIntent().getExtras().getString("patient_email");
+        String email_id = getActivity().getIntent().getExtras().getString("patient_email").replace(".",",");
         Query query = reference.child(email_id).orderByChild("type").equalTo("Hospitalisation");
 
         FirebaseRecyclerOptions<Fiche> options = new FirebaseRecyclerOptions.Builder<Fiche>()

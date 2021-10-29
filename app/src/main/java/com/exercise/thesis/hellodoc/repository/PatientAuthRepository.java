@@ -61,7 +61,7 @@ public class PatientAuthRepository {
             if (task.isSuccessful()) {
                 firebaseUser.postValue(firebaseAuth.getCurrentUser());
                 Patient patient = new Patient(fullName, email, mblNum);
-                reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(patient);
+                reference.child(email.replace(".",",")).setValue(patient);
                 Toast.makeText(application, "Sign Up successful!", Toast.LENGTH_SHORT).show();
             } else {
                 if (task.getException() instanceof FirebaseAuthUserCollisionException) {

@@ -20,6 +20,10 @@ import androidx.navigation.Navigation;
 import com.exercise.thesis.hellodoc.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class SplashscreenFragment extends Fragment {
@@ -59,10 +63,24 @@ public class SplashscreenFragment extends Fragment {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 // If there exists a user who has signed in before then check if he was signed up using an email
                 if (user != null) {
-                    String email = user.getEmail();
+                    String email = user.getUid();
+                    final boolean[] isDoctor = {false};
+                    FirebaseDatabase.getInstance().getReference("doctor").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.hasChild(email)){
+                                isDoctor[0] = true;
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                     //Toast.makeText(getContext(), " " + email, Toast.LENGTH_SHORT).show();
                     //If the user has no email, then it means that the user is a patient else the user is a doctor
-                    if (email == null)
+                    if (!isDoctor[0])
                         Navigation.findNavController(view).navigate(R.id.action_splashscreenFragment_to_homepageFragment);
                     else
                         Navigation.findNavController(view).navigate(R.id.action_splashscreenFragment_to_doctorProfileFragment);

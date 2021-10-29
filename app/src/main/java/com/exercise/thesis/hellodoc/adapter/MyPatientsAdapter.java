@@ -66,7 +66,7 @@ public class MyPatientsAdapter extends FirebaseRecyclerAdapter<Patient, MyPatien
             }
         });
 
-        String imageId = patient.getEmail()+".jpg"; //add a title image
+        String imageId = patient.getEmail().replace(".",",")+".jpg"; //add a title image
         pathReference = FirebaseStorage.getInstance().getReference().child("DoctorProfile/"+ imageId); //storage the image
         pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -97,7 +97,7 @@ public class MyPatientsAdapter extends FirebaseRecyclerAdapter<Patient, MyPatien
     private void openPatientMedicalFolder(Context medicalFolder, Patient patient){
         Intent intent = new Intent(medicalFolder, DossierMedical.class);
         intent.putExtra("patient_name", patient.getFullName());
-        intent.putExtra("patient_email",patient.getEmail());
+        intent.putExtra("patient_email",patient.getEmail().replace(".",","));
         intent.putExtra("patient_phone", patient.getMblNum());
         medicalFolder.startActivity(intent);
 

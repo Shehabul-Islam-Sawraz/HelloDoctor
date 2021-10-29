@@ -66,7 +66,7 @@ public class EditDoctorProfile extends Fragment {
     private TextInputEditText doctorAddress;
     private TextInputEditText doctorSpe;
     private TextInputEditText doctorAbout;
-    final String currentDoctorUID = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+    final String currentDoctorUID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
     final String doctorID = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
     private Uri uriImage = null;
     private String docId;

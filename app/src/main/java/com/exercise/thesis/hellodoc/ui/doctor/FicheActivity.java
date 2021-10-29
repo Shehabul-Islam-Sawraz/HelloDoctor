@@ -72,7 +72,7 @@ public class FicheActivity extends AppCompatActivity implements AdapterView.OnIt
         String typeRecords = recordsType.getSelectedItem().toString();
 
         String patient_name = getIntent().getStringExtra("patient_name");
-        String patient_email = getIntent().getStringExtra("patient_email");
+        String patient_email = getIntent().getStringExtra("patient_email").replace(".",",");
 
         Fiche records = new Fiche(diseaseRecord, descriptionRecords, treatmentRecords, typeRecords, FirebaseAuth.getInstance().getCurrentUser().getUid());
         reference.child(patient_email).setValue(records).addOnSuccessListener(new OnSuccessListener<Void>() {

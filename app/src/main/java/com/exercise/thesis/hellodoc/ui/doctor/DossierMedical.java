@@ -36,12 +36,14 @@ import com.squareup.picasso.Picasso;
 
 public class DossierMedical extends AppCompatActivity {
     private final static String TAG = "DossierMedical";
+    public static String email;
+    public static boolean homepage=false;
     private FloatingActionButton createNewFicheButton;
     private String patient_email;
     private Button infoBtn;
     private String patient_name;
     private String patient_phone;
-    final String patientID = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    final String patientID = FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".",",");
     private FirebaseDatabase database;
     private DatabaseReference reference;
     StorageReference pathReference ;
@@ -54,7 +56,7 @@ public class DossierMedical extends AppCompatActivity {
         this.database = FirebaseDatabase.getInstance();
         this.reference = database.getReference("patient");
         ImageView image = findViewById(R.id.imageView2);
-        patient_email = getIntent().getStringExtra("patient_email");
+        patient_email = getIntent().getStringExtra("patient_email").replace(".",",");
         this.configureViewPager();
 
         Log.d(TAG, "onCreate dossier medical activity: started");
@@ -109,7 +111,7 @@ public class DossierMedical extends AppCompatActivity {
         if(getIntent().hasExtra("patient_name") && getIntent().hasExtra("patient_email")){
             Log.d(TAG, "getIncomingIntent: found intent extras.");
             patient_name = getIntent().getStringExtra("patient_name");
-            patient_email = getIntent().getStringExtra("patient_email");
+            patient_email = getIntent().getStringExtra("patient_email").replace(".",",");
             patient_phone = getIntent().getStringExtra("patient_phone");
 
             //set patient name, email, phone number
@@ -123,7 +125,7 @@ public class DossierMedical extends AppCompatActivity {
                     Patient patient = snapshot.child(patientID).getValue(Patient.class);
                     patient_name = patient.getFullName();
                     patient_phone = patient.getMblNum();
-                    patient_email = patient.getEmail();
+                    patient_email = patient.getEmail().replace(".",",");
                     //set patient name, email, phone number
                     setPatientInfo(patient_name, patient_email, patient_phone);
                 }
@@ -145,7 +147,7 @@ public class DossierMedical extends AppCompatActivity {
         TextView name = findViewById(R.id.patient_name_dossier);
         name.setText(patient_name);
         TextView email = findViewById(R.id.patient_address_dossier);
-        email.setText(patient_email);
+        email.setText(patient_email.replace(",","."));
         TextView number = findViewById(R.id.phone_number_dossier);
         number.setText(patient_phone);
     }
@@ -171,7 +173,7 @@ public class DossierMedical extends AppCompatActivity {
     private void openPatientFiche(){
         Intent intent = new Intent(this, FicheActivity.class);
         String patient_name = getIntent().getStringExtra("patient_name");
-        String patient_email = getIntent().getStringExtra("patient_email");
+        String patient_email = getIntent().getStringExtra("patient_email").replace(".",",");
         intent.putExtra("patient_email", patient_email);
         intent.putExtra("patient_name", patient_name);
         startActivity(intent);
@@ -180,7 +182,7 @@ public class DossierMedical extends AppCompatActivity {
     private void openPatientInfo(){
         Intent intent = new Intent(this, PatientInfoActivity.class);
         String patient_name = getIntent().getStringExtra("patient_name");
-        String patient_email = getIntent().getStringExtra("patient_email");
+        String patient_email = getIntent().getStringExtra("patient_email").replace(".",",");
         intent.putExtra("patient_email", patient_email);
         intent.putExtra("patient_name", patient_name);
         startActivity(intent);

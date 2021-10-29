@@ -59,7 +59,7 @@ public class AppointmentFragment extends Fragment {
         getParentFragmentManager().setFragmentResultListener("dataFromProfile", this, new FragmentResultListener() {
             @Override
             public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                patient_email = result.getString("key1");
+                patient_email = result.getString("key1").replace(".",",");
                 day = result.getString("key2");
             }
         });
