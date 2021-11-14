@@ -16,12 +16,13 @@ public class Fiche {
 
     }
 
-    public Fiche(String disease, String description, String treatment, String type, String doctor) {
+    public Fiche(String disease, String description, String treatment, String type, String doctor, Date date) {
         this.disease = disease;
         this.description = description;
         this.treatment = treatment;
         this.type = type;
         this.doctor = doctor;
+        this.dateCreated = date;
     }
 
     public String getDisease() {

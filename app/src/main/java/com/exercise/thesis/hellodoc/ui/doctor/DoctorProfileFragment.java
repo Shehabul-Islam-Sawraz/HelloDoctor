@@ -35,6 +35,7 @@ public class DoctorProfileFragment extends Fragment implements DatePickerDialog.
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private View viewThis;
+    private static boolean isWelcomed = false;
 
     static String doc;
     Button signOutBtn2;
@@ -82,14 +83,17 @@ public class DoctorProfileFragment extends Fragment implements DatePickerDialog.
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Doctor doctor = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue(Doctor.class);
+                Doctor doctor = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".",",")).getValue(Doctor.class);
                 //String text = "Yo";
                 if (doctor != null) {
                     System.out.println(doctor.toString());
                     //text = "Name-> " + doctor.getFullName() + "\nEmail-> " + doctor.getEmail() + "\nUsername-> " + doctor.getUserName();
                 }
                 //textView.setText(text);
-                Toast.makeText(getActivity(), "Welcome "+doctor.getFullName(), Toast.LENGTH_SHORT).show();
+                if(isWelcomed==false){
+                    Toast.makeText(getActivity(), "Welcome "+doctor.getFullName(), Toast.LENGTH_SHORT).show();
+                    isWelcomed=true;
+                }
 //                System.out.println("WHY");
 //                System.out.println(FirebaseAuth.getInstance().getCurrentUser().getUid());
             }

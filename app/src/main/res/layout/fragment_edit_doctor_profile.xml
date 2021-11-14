@@ -112,31 +112,7 @@ tools:context=".ui.doctor.EditDoctorProfile">
 </com.google.android.material.textfield.TextInputLayout>
 
 
-<com.google.android.material.textfield.TextInputLayout
-    android:id="@+id/edit_email"
-    android:layout_width="match_parent"
-    android:layout_height="45dp"
-    android:layout_marginStart="32dp"
-    android:layout_marginLeft="32dp"
-    android:layout_marginEnd="32dp"
-    android:layout_marginRight="32dp"
-    android:hint="Enter your Email"
-    android:textColorHint="#22BE87"
-    app:boxBackgroundMode="outline"
-    app:boxStrokeColor="#22BE87"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/edit_address"
-    app:layout_constraintVertical_bias="0.07">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/emailText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-</com.google.android.material.textfield.TextInputLayout>
 
 
 <com.google.android.material.textfield.TextInputLayout
@@ -155,8 +131,8 @@ tools:context=".ui.doctor.EditDoctorProfile">
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/edit_email"
-    app:layout_constraintVertical_bias="0.09">
+    app:layout_constraintTop_toBottomOf="@+id/edit_address"
+    app:layout_constraintVertical_bias="0.07">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/specialitiesText"
@@ -183,7 +159,7 @@ tools:context=".ui.doctor.EditDoctorProfile">
     app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/edit_specialities"
-    app:layout_constraintVertical_bias="0.12">
+    app:layout_constraintVertical_bias="0.1">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/aboutText"
@@ -197,7 +173,7 @@ tools:context=".ui.doctor.EditDoctorProfile">
         android:id="@+id/image_profile"
         android:layout_width="118dp"
         android:layout_height="119dp"
-        android:background="@drawable/img"
+        android:background="@drawable/doctor1"
         android:scaleType="center"
         app:layout_constraintBottom_toTopOf="@+id/edit_name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -225,7 +201,7 @@ tools:context=".ui.doctor.EditDoctorProfile">
         android:id="@+id/select_image"
         android:layout_width="29dp"
         android:layout_height="30dp"
-        android:src="@drawable/ic_camera_alt_black_24dp"
+        app:srcCompat="@drawable/ic_camera_alt_black_24dp"
         app:layout_constraintBottom_toTopOf="@+id/edit_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

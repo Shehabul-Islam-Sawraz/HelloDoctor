@@ -17,7 +17,7 @@
             android:id="@+id/imageView2"
             android:layout_width="70dp"
             android:layout_height="77dp"
-            app:srcCompat="@drawable/doctor1" />
+            android:src="@drawable/doctor1" />
 
         <TextView
             android:id="@+id/patient_address_dossier"
@@ -77,8 +77,8 @@
             android:contentDescription="TODO"
             android:focusable="true"
             android:scaleType="center"
-            android:src="@android:drawable/ic_menu_edit"
             app:backgroundTint="@color/colorAccent"
+            app:srcCompat="@android:drawable/ic_menu_edit"
             tools:ignore="RelativeOverlap" />
 
         <Button
@@ -117,7 +117,6 @@
         android:id="@+id/ViewPagerDossier"
         android:layout_width="match_parent"
         android:layout_height="fill_parent">
-
 
     </androidx.viewpager.widget.ViewPager>
     <com.google.android.material.floatingactionbutton.FloatingActionButton

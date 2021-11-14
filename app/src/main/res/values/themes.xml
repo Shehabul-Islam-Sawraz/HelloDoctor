@@ -17,4 +17,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="SearchViewStyle" >
+        <item name="android:editTextColor">#FFFFFF</item>
+    </style>
 </resources>

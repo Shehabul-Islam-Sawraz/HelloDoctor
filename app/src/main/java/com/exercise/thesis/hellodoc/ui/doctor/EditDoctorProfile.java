@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -15,7 +16,9 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.Navigation;
@@ -56,18 +59,19 @@ import com.squareup.picasso.Picasso;
 public class EditDoctorProfile extends Fragment {
 
     private static final int PICK_IMAGE_REQUEST = 1;
+    private static int storagePermission = 1;
     private static final String TAG = "EditProfileDoctorActivity";
     private ImageView profileImage;
     private ImageButton selectImage;
     private Button updateProfile;
     private TextInputEditText doctorName;
-    private TextInputEditText doctorEmail;
     private TextInputEditText doctorPhone;
     private TextInputEditText doctorAddress;
     private TextInputEditText doctorSpe;
     private TextInputEditText doctorAbout;
     final String currentDoctorUID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
     final String doctorID = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
+    private String current_email;
     private Uri uriImage = null;
     private String docId;
     private static final int MY_REQUEST_CODE_PERMISSION = 1000;
@@ -146,7 +150,6 @@ public class EditDoctorProfile extends Fragment {
         updateProfile = view.findViewById(R.id.update);
         doctorName = view.findViewById(R.id.nameText);
         doctorPhone = view.findViewById(R.id.phoneText);
-        doctorEmail = view.findViewById(R.id.emailText);
         doctorAddress = view.findViewById(R.id.addressText);
         doctorSpe = view.findViewById(R.id.specialitiesText);
         doctorAbout = view.findViewById(R.id.aboutText);
@@ -158,7 +161,7 @@ public class EditDoctorProfile extends Fragment {
                 String current_phone = result.getString("doc_phone");
                 String current_address = result.getString("doc_hos");
                 String current_photo = result.getString("doc_photo");
-                String current_email = result.getString("doc_email");
+                current_email = result.getString("doc_email");
                 String current_spe = result.getString("doc_specialities");
                 String current_about = result.getString("doc_about");
 
@@ -166,7 +169,6 @@ public class EditDoctorProfile extends Fragment {
                 doctorName.setText(current_name);
                 doctorPhone.setText(current_phone);
                 doctorAddress.setText(current_address);
-                doctorEmail.setText(current_email);
                 doctorSpe.setText(current_spe);
                 doctorAbout.setText(current_about);
 
@@ -188,6 +190,7 @@ public class EditDoctorProfile extends Fragment {
                                 }
                             });
                 }
+
                 // profileImage.setImageURI(uri);
             }
         });
@@ -204,11 +207,10 @@ public class EditDoctorProfile extends Fragment {
             public void onClick(View view) {
                 String updateAddress = doctorAddress.getText().toString();
                 String updateName = doctorName.getText().toString();
-                String updateEmail = doctorEmail.getText().toString();
                 String updatePhone = doctorPhone.getText().toString();
                 String updateSpe = doctorSpe.getText().toString();
                 String updateAbout = doctorAbout.getText().toString();
-                if(updateName==null || updateName.equals("") || updateEmail==null || updateEmail.equals("") || updateAddress==null || updateAddress.equals("")){
+                if(updateName==null || updateName.equals("") || updateAddress==null || updateAddress.equals("")){
                     Toast.makeText(getActivity(), "Please provide correct information!!", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -222,9 +224,9 @@ public class EditDoctorProfile extends Fragment {
                         updateAbout = "";
                     }
                     if(uriImage!=null){
-                        uploadImageToFirebase(uriImage);
+                        uploadImageToFirebase(uriImage,current_email);
                     }
-                    updateDoctorInfo(updateName, updateAddress, updatePhone,updateEmail,updateSpe,updateAbout);
+                    updateDoctorInfo(updateName, updateAddress, updatePhone,current_email,updateSpe,updateAbout);
                 }
 
             }
@@ -237,7 +239,7 @@ public class EditDoctorProfile extends Fragment {
         doc.setAbout(about);
         doc.setPhoneNum(phone);
         doc.setSpecialities(spe);
-        reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(doc).addOnSuccessListener(new OnSuccessListener<Void>() {
+        reference.child(email.replace(".",",")).setValue(doc).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 //Toast.makeText(getActivity(), name + "." + address + "." + phone + "." + email + "." + spe, Toast.LENGTH_SHORT).show();
@@ -274,9 +276,14 @@ public class EditDoctorProfile extends Fragment {
     }
 
     private void doBrowseFile()  {
-        getPhoto.launch("image/*");
+        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            getPhoto.launch("image/*");
+        }
+        else{
+            requestExternalPermission();
+        }
     }
-    private void uploadImageToFirebase(Uri uri){
+    private void uploadImageToFirebase(Uri uri, String email){
         StorageReference ref = storage.child(System.currentTimeMillis() + "." + getImageType(uri));
         progressDialog.show();
         ref.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -286,7 +293,7 @@ public class EditDoctorProfile extends Fragment {
                     @Override
                     public void onSuccess(Uri uri) {
                         Image image = new Image(uri.toString());
-                        imageRef.child(docId).setValue(image);
+                        imageRef.child(email.replace(".",",")).setValue(image);
                         Toast.makeText(getActivity(), "Upload Successful!!", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -314,5 +321,39 @@ public class EditDoctorProfile extends Fragment {
         ContentResolver cr = getActivity().getContentResolver();
         MimeTypeMap mp = MimeTypeMap.getSingleton();
         return mp.getExtensionFromMimeType(cr.getType(uri));
+    }
+
+    private void requestExternalPermission(){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)){
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("Permission Needed")
+                    .setMessage("This permission will help us to make your usage more compatible!!")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, storagePermission);
+                        }
+                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            }).create().show();
+        }
+        else{
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, storagePermission);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == storagePermission) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+            } else {
+                Toast.makeText(getActivity(), "Permission Denied!!", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.exercise.thesis.hellodoc.R;
@@ -19,6 +21,7 @@ import com.exercise.thesis.hellodoc.adapter.ConsultationFragmentAdapter;
 import com.exercise.thesis.hellodoc.common.Common;
 import com.exercise.thesis.hellodoc.model.Doctor;
 import com.exercise.thesis.hellodoc.model.Patient;
+import com.exercise.thesis.hellodoc.ui.home.HomepageFragment;
 import com.exercise.thesis.hellodoc.ui.patient.PatientInfoActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -80,7 +83,7 @@ public class DossierMedical extends AppCompatActivity {
             }
         });
 
-        String imageId = patient_email+".jpg"; //add a title image
+        String imageId = patient_email.replace(".",",")+".jpg"; //add a title image
         pathReference = FirebaseStorage.getInstance().getReference().child("DoctorProfile/"+ imageId); //storage the image
         pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -93,11 +96,6 @@ public class DossierMedical extends AppCompatActivity {
                         .into(image);//Image location
 
                 // profileImage.setImageURI(uri);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
             }
         });
 
@@ -186,5 +184,10 @@ public class DossierMedical extends AppCompatActivity {
         intent.putExtra("patient_email", patient_email);
         intent.putExtra("patient_name", patient_name);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

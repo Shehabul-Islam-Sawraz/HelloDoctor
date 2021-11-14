@@ -17,6 +17,7 @@ public class Common {
     public static String CurrentUserType = "patient";
     public static int step = 0;
     public static String CurrentDoctor = "testdoc@testdoc.com";
+    public static String CurrentDoctorUId = "";
     public static String CurrentAppointmentType;
     public static int currentTimeSlot = -1;
     public static String CurrentDoctorName = "yassine";

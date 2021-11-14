@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_marginBottom="8dp"
+app:cardBackgroundColor="@color/cardview_light_background"
+    >
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="95dp"
+    >
+
+    <TextView
+        android:id="@+id/patient_name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="97dp"
+        android:layout_marginLeft="97dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="Patient name"
+        android:textColor="#22BE87"
+        android:textSize="21sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="283dp"
+        android:layout_marginLeft="283dp"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/roboto"
+        android:text="Status:"
+        android:textColor="#7E7D7D"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="335dp"
+        android:layout_marginLeft="335dp"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/roboto"
+        android:text="Accepted"
+        android:textColor="#22BE87"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/appointment_type_patient"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="66dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:background="@drawable/button_radius_accent_color"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:text="Hospitalisation"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/patient_phone2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="98dp"
+        android:layout_marginLeft="98dp"
+        android:layout_marginTop="42dp"
+        android:fontFamily="@font/roboto"
+        android:text="01234567899"
+        android:textColor="#918D8D"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/patient_image2"
+        android:layout_width="69dp"
+        android:layout_height="65dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginBottom="16dp"
+        android:foregroundGravity="center"
+        app:srcCompat="@drawable/ic_anon_user_48dp" />
+
+    <TextView
+        android:id="@+id/appointment_date_patient"
+        android:layout_width="184dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="96dp"
+        android:layout_marginLeft="96dp"
+        android:layout_marginTop="68dp"
+        android:fontFamily="@font/roboto"
+        android:text="12/06/2020 at 9pm"
+        android:textColor="#22BE87"
+        android:textSize="14sp" />
+
+
+</RelativeLayout>
+</androidx.cardview.widget.CardView>

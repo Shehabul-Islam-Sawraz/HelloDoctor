@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.exercise.thesis.hellodoc.R;
 import com.exercise.thesis.hellodoc.adapter.ConfirmedAppointmentAdapter;
@@ -48,24 +50,34 @@ public class MyPatientsFragment extends Fragment{
         this.database = FirebaseDatabase.getInstance();
         this.reference = database.getReference("MyPatients");
         this.viewThis = view;
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        getActivity().getWindow().setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setUpRecyclerView();
     }
 
     public void setUpRecyclerView(){
 
-        final String doctorID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final String doctorID = FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".",",");
         Query query = reference.child(doctorID).orderByChild("fullName");
 
         FirebaseRecyclerOptions<Patient> options = new FirebaseRecyclerOptions.Builder<Patient>()
                 .setQuery(query, Patient.class)
                 .build();
 
-        adapter = new MyPatientsAdapter(options);
+        FirebaseRecyclerOptions<Patient> newList = options;
+
+
+        adapter = new MyPatientsAdapter(newList);
         //ListMyPatients
         RecyclerView recyclerView = viewThis.findViewById(R.id.ListMyPatients);
+        recyclerView.getRecycledViewPool().clear();
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -78,5 +90,12 @@ public class MyPatientsFragment extends Fragment{
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpRecyclerView();
+        adapter.startListening();
     }
 }

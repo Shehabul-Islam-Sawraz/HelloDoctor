@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.exercise.thesis.hellodoc.R;
+import com.exercise.thesis.hellodoc.common.Common;
 import com.exercise.thesis.hellodoc.model.AppointmentInformation;
 import com.exercise.thesis.hellodoc.model.Doctor;
 import com.exercise.thesis.hellodoc.model.Patient;
@@ -50,9 +53,6 @@ public class DoctorAppointmentAdapter extends FirebaseRecyclerAdapter<Appointmen
 
     @Override
     protected void onBindViewHolder(@NonNull MyDoctorAppointmentHolder myDoctorAppointmentHolder, @SuppressLint("RecyclerView") int position, @NonNull final AppointmentInformation appointmentInformation) {
-        myDoctorAppointmentHolder.dateAppointment.setText(appointmentInformation.getTime());
-        myDoctorAppointmentHolder.patientName.setText(appointmentInformation.getPatientName());
-        myDoctorAppointmentHolder.appointmentType.setText(appointmentInformation.getAppointmentType());
         this.database = FirebaseDatabase.getInstance();
         this.reference = database.getReference("PatientAppointment");
         this.patientReference = database.getReference("patient");
@@ -60,12 +60,22 @@ public class DoctorAppointmentAdapter extends FirebaseRecyclerAdapter<Appointmen
         this.doctorReference = database.getReference("doctor");
         this.patientDoctorReference = database.getReference("PatientDoctor");
         this.appointmentReference = database.getReference("appointment");
+        while(true){
+            if(appointmentReference!=null){
+                myDoctorAppointmentHolder.dateAppointment.setText(appointmentInformation.getTime());
+                myDoctorAppointmentHolder.patientName.setText(appointmentInformation.getPatientName());
+                myDoctorAppointmentHolder.appointmentType.setText(appointmentInformation.getAppointmentType());
+                myDoctorAppointmentHolder.patientPhone.setText(appointmentInformation.getPatientId());
+                //System.out.println(appointmentInformation.getChain().toString());
+                break;
+            }
+        }
         myDoctorAppointmentHolder.approveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 appointmentInformation.setType("Accepted");
 
-                reference.child(appointmentInformation.getPatientId()).child("calendar").child(appointmentInformation.getTime().replace("/","_")).
+                reference.child(appointmentInformation.getPatientId().replace(".",",")).child("calendar").child(appointmentInformation.getTime().replace("/","_")).
                         setValue(appointmentInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -104,7 +114,7 @@ public class DoctorAppointmentAdapter extends FirebaseRecyclerAdapter<Appointmen
                     }
                 });
 
-                appointmentReference.child(appointmentInformation.getDoctorId()).child("calendar").
+                appointmentReference.child(appointmentInformation.getDoctorId().replace(".",",")).child("calendar").
                         child(appointmentInformation.getTime().replace("/","_")).setValue(appointmentInformation).
                         addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -117,9 +127,9 @@ public class DoctorAppointmentAdapter extends FirebaseRecyclerAdapter<Appointmen
                 patientReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Patient patient = snapshot.child(appointmentInformation.getPatientId()).getValue(Patient.class);
+                        Patient patient = snapshot.child(appointmentInformation.getPatientId().replace(".",",")).getValue(Patient.class);
                         if(patient!=null){
-                            myPatientsReference.child(appointmentInformation.getDoctorId()).child(appointmentInformation.getPatientId()).
+                            myPatientsReference.child(appointmentInformation.getDoctorId().replace(".",",")).child(appointmentInformation.getPatientId().replace(".",",")).
                                     setValue(patient).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
@@ -143,8 +153,10 @@ public class DoctorAppointmentAdapter extends FirebaseRecyclerAdapter<Appointmen
                 doctorReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Doctor doctor = snapshot.child(appointmentInformation.getDoctorId()).getValue(Doctor.class);
-                        patientDoctorReference.child(appointmentInformation.getPatientId()).setValue(doctor).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        Doctor doctor = snapshot.child(appointmentInformation.getDoctorId().replace(".",",")).getValue(Doctor.class);
+                        patientDoctorReference.child(appointmentInformation.getPatientId().replace(".",","))
+                                .child(System.currentTimeMillis()+"").setValue(doctor)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
                                 Toast.makeText(v.getContext(), "Doctor added successfully!!", Toast.LENGTH_SHORT).show();
@@ -171,7 +183,7 @@ public class DoctorAppointmentAdapter extends FirebaseRecyclerAdapter<Appointmen
             public void onClick(View v) {
                 appointmentInformation.setType("Refused");
 
-                reference.child(appointmentInformation.getPatientId()).child("calendar").child(appointmentInformation.getTime().replace("/","_")).
+                reference.child(appointmentInformation.getPatientId().replace(".",",")).child("calendar").child(appointmentInformation.getTime().replace("/","_")).
                         setValue(appointmentInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -192,7 +204,7 @@ public class DoctorAppointmentAdapter extends FirebaseRecyclerAdapter<Appointmen
             }
         });
 
-        String imageId = appointmentInformation.getPatientId()+".jpg"; //add a title image
+        String imageId = appointmentInformation.getPatientId().replace(".",",")+".jpg"; //add a title image
         pathReference = FirebaseStorage.getInstance().getReference().child("DoctorProfile/"+ imageId); //storage the image
         pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -231,18 +243,20 @@ public class DoctorAppointmentAdapter extends FirebaseRecyclerAdapter<Appointmen
         //Here we hold the MyDoctorAppointmentItems
         TextView dateAppointment;
         TextView patientName;
+        TextView patientPhone;
         Button approveBtn;
         Button cancelBtn;
         TextView appointmentType;
         ImageView patient_image;
         public MyDoctorAppointmentHolder(@NonNull View itemView) {
             super(itemView);
-            dateAppointment = itemView.findViewById(R.id.appointement_date);
-            patientName = itemView.findViewById(R.id.patient_name);
-            approveBtn = itemView.findViewById(R.id.btn_accept);
-            cancelBtn = itemView.findViewById(R.id.btn_decline);
-            appointmentType = itemView.findViewById(R.id.appointment_type);
-            patient_image = itemView.findViewById(R.id.patient_image);
+            dateAppointment = itemView.findViewById(R.id.appointment_date_pat);
+            patientName = itemView.findViewById(R.id.patient_name_pat);
+            patientPhone = itemView.findViewById(R.id.patient_phone_pat);
+            approveBtn = itemView.findViewById(R.id.btn_accept_pat);
+            cancelBtn = itemView.findViewById(R.id.btn_decline_pat);
+            appointmentType = itemView.findViewById(R.id.appointment_type_pat);
+            patient_image = itemView.findViewById(R.id.patient_image_pat);
         }
     }
 

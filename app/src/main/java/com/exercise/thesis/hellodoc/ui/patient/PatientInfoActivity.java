@@ -1,6 +1,7 @@
 package com.exercise.thesis.hellodoc.ui.patient;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.navigation.Navigation;
 import com.exercise.thesis.hellodoc.R;
 import com.exercise.thesis.hellodoc.common.Common;
 import com.exercise.thesis.hellodoc.model.Patient;
+import com.exercise.thesis.hellodoc.ui.doctor.DossierMedical;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +38,8 @@ public class PatientInfoActivity extends AppCompatActivity {
     Button updateBtn;
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    String patient_email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +56,12 @@ public class PatientInfoActivity extends AppCompatActivity {
         specialistList.setAdapter(adapterSpecialistList);
 
         String patient_name = getIntent().getStringExtra("patient_name");
-        String patient_email = getIntent().getStringExtra("patient_email");
+        patient_email = getIntent().getStringExtra("patient_email");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Patient patient = snapshot.child(patient_email).getValue(Patient.class);
+                Patient patient = snapshot.child(patient_email.replace(".",",")).getValue(Patient.class);
                 weightBtn.setText(patient.getWeight());
                 heightBtn.setText(patient.getHeight());
                 if(patient.getBloodType()!=null){
@@ -83,12 +87,12 @@ public class PatientInfoActivity extends AppCompatActivity {
                 reference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Patient patient = snapshot.child(patient_email).getValue(Patient.class);
+                        Patient patient = snapshot.child(patient_email.replace(".",",")).getValue(Patient.class);
                         patient.setHeight(heightBtn.getText().toString());
                         patient.setWeight(weightBtn.getText().toString());
                         patient.setBloodType(specialistList.getSelectedItem().toString());
 
-                        reference.child(patient_email).setValue(patient).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        reference.child(patient_email.replace(".",",")).setValue(patient).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
                                 Toast.makeText(PatientInfoActivity.this,"Update Info Successfully!",Toast.LENGTH_SHORT).show();
@@ -106,7 +110,7 @@ public class PatientInfoActivity extends AppCompatActivity {
 
                     }
                 });
-
+                PatientInfoActivity.super.onBackPressed();
             }
         });
         if(Common.CurrentUserType.equals("patient")){
@@ -115,5 +119,10 @@ public class PatientInfoActivity extends AppCompatActivity {
             weightBtn.setEnabled(false);
             specialistList.setEnabled(false);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

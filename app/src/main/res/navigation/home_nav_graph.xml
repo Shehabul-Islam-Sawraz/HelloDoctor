@@ -112,7 +112,23 @@
         android:id="@+id/homepageFragment"
         android:name="com.exercise.thesis.hellodoc.ui.home.HomepageFragment"
         android:label="fragment_homepage"
-        tools:layout="@layout/fragment_homepage" />
+        tools:layout="@layout/fragment_homepage" >
+        <action
+            android:id="@+id/action_homepageFragment_to_patientAppointmentFragment"
+            app:destination="@id/patientAppointmentFragment" />
+        <action
+            android:id="@+id/action_homepageFragment_to_searchPatientFragment"
+            app:destination="@id/searchPatientFragment" />
+        <action
+            android:id="@+id/action_homepageFragment_to_confirmationFragment"
+            app:destination="@id/confirmationFragment" />
+        <action
+            android:id="@+id/action_homepageFragment_to_myDoctorsFragment"
+            app:destination="@id/myDoctorsFragment" />
+        <action
+            android:id="@+id/action_homepageFragment_to_profilePatientFragment"
+            app:destination="@id/profilePatientFragment" />
+    </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.exercise.thesis.hellodoc.ui.AboutApp.AboutFragment"
@@ -212,5 +228,41 @@
         android:name="com.exercise.thesis.hellodoc.ui.doctor.DoctorAppointmentFragment"
         android:label="fragment_doctor_appointment"
         tools:layout="@layout/fragment_doctor_appointment" />
+    <fragment
+        android:id="@+id/patientAppointmentFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.patient.PatientAppointmentFragment"
+        android:label="fragment_patient_appointment"
+        tools:layout="@layout/fragment_patient_appointment" />
+    <fragment
+        android:id="@+id/searchPatientFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.patient.SearchPatientFragment"
+        android:label="fragment_search_patient"
+        tools:layout="@layout/fragment_search_patient" />
+    <fragment
+        android:id="@+id/myDoctorsFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.patient.MyDoctorsFragment"
+        android:label="fragment_my_doctors"
+        tools:layout="@layout/fragment_my_doctors" />
+    <fragment
+        android:id="@+id/profilePatientFragment"
+        android:name="com.exercise.thesis.hellodoc.ui.patient.ProfilePatientFragment"
+        android:label="fragment_profile_patient"
+        tools:layout="@layout/fragment_profile_patient" >
+        <action
+            android:id="@+id/action_profilePatientFragment_to_homepageFragment"
+            app:destination="@id/homepageFragment" />
+        <action
+            android:id="@+id/action_profilePatientFragment_to_editPatientProfile"
+            app:destination="@id/editPatientProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/editPatientProfile"
+        android:name="com.exercise.thesis.hellodoc.ui.patient.EditPatientProfile"
+        android:label="fragment_edit_patient_profile"
+        tools:layout="@layout/fragment_edit_patient_profile" >
+        <action
+            android:id="@+id/action_editPatientProfile_to_profilePatientFragment"
+            app:destination="@id/profilePatientFragment" />
+    </fragment>
 
 </navigation>

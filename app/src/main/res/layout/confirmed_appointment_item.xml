@@ -22,7 +22,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="114dp"
             android:layout_marginLeft="114dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="22dp"
             android:fontFamily="@font/roboto"
             android:text="Patient name"
             android:textColor="#22BE87" />
@@ -34,15 +34,15 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="82dp"
-            android:layout_marginEnd="19dp"
+            android:layout_marginTop="76dp"
+            android:layout_marginEnd="17dp"
             android:layout_marginRight="19dp"
             android:background="@drawable/button_radius_accent_color"
             android:fontFamily="@font/roboto"
             android:gravity="center"
             android:text="Hospitalisation"
             android:textColor="#fff"
-            android:textSize="13sp"/>
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/patient_phone"
@@ -53,11 +53,11 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="113dp"
             android:layout_marginLeft="113dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="48dp"
             android:fontFamily="@font/roboto"
             android:text="01234567899"
             android:textColor="#181818"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
         <ImageView
             android:id="@+id/patient_image"
@@ -74,18 +74,18 @@
 
         <TextView
             android:id="@+id/appointement_date"
-            android:layout_width="116dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="114dp"
-            android:layout_marginLeft="114dp"
-            android:layout_marginTop="82dp"
+            android:layout_marginStart="113dp"
+            android:layout_marginLeft="113dp"
+            android:layout_marginTop="76dp"
             android:fontFamily="@font/roboto"
             android:text="12/06/2020 at 9pm"
             android:textColor="#22BE87"
-            android:textSize="12sp" />
+            android:textSize="13sp" />
 
 
     </RelativeLayout>

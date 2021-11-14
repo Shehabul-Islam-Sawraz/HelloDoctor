@@ -43,7 +43,7 @@ public class ConsultationAdapter  extends FirebaseRecyclerAdapter<Fiche,Consulta
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Doctor doctor = snapshot.child(model.getDoctor()).getValue(Doctor.class);
+                Doctor doctor = snapshot.child(model.getDoctor().replace(".",",")).getValue(Doctor.class);
                 holder.doctor_name.setText(doctor.getFullName());
             }
 
@@ -75,8 +75,9 @@ public class ConsultationAdapter  extends FirebaseRecyclerAdapter<Fiche,Consulta
     private void openPage(Context wf, Fiche m){
         Intent i = new Intent(wf, FicheInfo.class);
         i.putExtra("dateCreated", m.getDateCreated().toString());
-        i.putExtra("doctor",m.getDoctor());
+        i.putExtra("disease",m.getDisease());
         i.putExtra("description",m.getDescription());
+        i.putExtra("treatment", m.getTreatment());
         wf.startActivity(i);
     }
 

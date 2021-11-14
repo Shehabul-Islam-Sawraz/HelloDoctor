@@ -55,7 +55,7 @@ public class ConfirmedAppointmentFragment extends Fragment {
     }
 
     private void setUpRecyclerView() {
-        String doctorID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String doctorID = FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".",",");
         Query query =appointmentReference.child(doctorID).child("calendar").orderByChild("time");
         FirebaseRecyclerOptions<AppointmentInformation> options = new FirebaseRecyclerOptions.Builder<AppointmentInformation>().
                 setQuery(query, AppointmentInformation.class).build();
@@ -81,4 +81,10 @@ public class ConfirmedAppointmentFragment extends Fragment {
         adapter.stopListening();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpRecyclerView();
+        adapter.startListening();
+    }
 }

@@ -12,11 +12,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.exercise.thesis.hellodoc.R;
+import com.exercise.thesis.hellodoc.common.Common;
 import com.exercise.thesis.hellodoc.model.Fiche;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class FicheActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -26,6 +30,7 @@ public class FicheActivity extends AppCompatActivity implements AdapterView.OnIt
     private Spinner recordsType;
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    SimpleDateFormat simpleDateFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,7 @@ public class FicheActivity extends AppCompatActivity implements AdapterView.OnIt
         description = findViewById(R.id.disease_description);
         treatment = findViewById(R.id.disease_treatment);
         recordsType = findViewById(R.id.records_type_spinner);
+        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         //Spinner to choose fiche type
         Spinner spinner = findViewById(R.id.records_type_spinner);
@@ -66,22 +72,44 @@ public class FicheActivity extends AppCompatActivity implements AdapterView.OnIt
     }
 
     private void addFiche(){
-        String diseaseRecord = disease.getText().toString();
-        String descriptionRecords =  description.getText().toString();
-        String treatmentRecords = treatment.getText().toString();
+        String diseaseRecord;
+        String descriptionRecords;
+        String treatmentRecords;
         String typeRecords = recordsType.getSelectedItem().toString();
+        if(disease.getText()==null || disease.getText().equals("")){
+            diseaseRecord = "";
+        }
+        else{
+            diseaseRecord = disease.getText().toString();
+        }
+        if(description.getText()==null || description.getText().equals("")){
+            descriptionRecords = "";
+        }
+        else{
+            descriptionRecords = description.getText().toString();
+        }
+        if(treatment.getText()==null || treatment.getText().equals("")){
+            treatmentRecords = "";
+        }
+        else{
+            treatmentRecords = treatment.getText().toString();
+        }
 
         String patient_name = getIntent().getStringExtra("patient_name");
         String patient_email = getIntent().getStringExtra("patient_email").replace(".",",");
 
-        Fiche records = new Fiche(diseaseRecord, descriptionRecords, treatmentRecords, typeRecords, FirebaseAuth.getInstance().getCurrentUser().getUid());
-        reference.child(patient_email).setValue(records).addOnSuccessListener(new OnSuccessListener<Void>() {
+        Fiche records = new Fiche(diseaseRecord, descriptionRecords, treatmentRecords, typeRecords, FirebaseAuth.getInstance().getCurrentUser().getEmail(), Calendar.getInstance().getTime());
+        reference.child(patient_email).child(System.currentTimeMillis()+"").setValue(records).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(FicheActivity.this, "Records added of "+ patient_name, Toast.LENGTH_LONG).show();
             }
         });
-        finish();
+        FicheActivity.super.onBackPressed();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

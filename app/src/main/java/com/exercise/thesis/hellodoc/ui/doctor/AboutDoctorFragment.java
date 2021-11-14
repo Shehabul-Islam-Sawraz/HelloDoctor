@@ -57,6 +57,7 @@ public class AboutDoctorFragment extends Fragment {
     private DatabaseReference imgReference;
     private View viewThis;
     private Uri profilePhoto = null;
+    private Doctor doctor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,10 +93,28 @@ public class AboutDoctorFragment extends Fragment {
         //AlertDialog dialog = new AlertDialog.Builder(getActivity()).setView(view).setCancelable(true).create();
         //dialog.show();
 
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                doctor = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".",",")).getValue(Doctor.class);
+                doctorName.setText(doctor.getFullName());
+                doctorSpe.setText(doctor.getSpecialities());
+                doctorPhone.setText(doctor.getPhoneNum());
+                doctorEmail.setText(doctor.getEmail());
+                doctorAddress.setText(doctor.getAddress());
+                doctorAbout.setText(doctor.getAbout());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         imgReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String imgUrl = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("imageUri").getValue(String.class);
+                String imgUrl = snapshot.child(doctor.getEmail().replace(".",",")).child("imageUri").getValue(String.class);
                 //Toast.makeText(getActivity(), "ImgUrl: "+imgUrl, Toast.LENGTH_SHORT).show();
                 if(imgUrl!=null){
                     profilePhoto = Uri.parse(imgUrl);
@@ -117,25 +136,6 @@ public class AboutDoctorFragment extends Fragment {
                             });
                     //Toast.makeText(getActivity(), "profile: "+profilePhoto, Toast.LENGTH_SHORT).show();
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Doctor doctor = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getValue(Doctor.class);
-                doctorName.setText(doctor.getFullName());
-                doctorSpe.setText(doctor.getSpecialities());
-                doctorPhone.setText(doctor.getPhoneNum());
-                doctorEmail.setText(doctor.getEmail());
-                doctorAddress.setText(doctor.getAddress());
-                doctorAbout.setText(doctor.getAbout());
             }
 
             @Override

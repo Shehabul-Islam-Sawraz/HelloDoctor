@@ -1,28 +1,28 @@
 package com.exercise.thesis.hellodoc.model;
 
+import android.net.Uri;
+
 public class Patient {
     private String fullName;
     private String email;
     private String mblNum;
-    private String dateAffected;
-    private String situationFamiliar;
     private String weight;
     private String height;
     private String bloodType;
+    private Uri photoUrl;
 
     public Patient() {
 
     }
 
-    public Patient(String fullName, String email, String mblNum) {
+    public Patient(String fullName, String email, String mblNum, Uri image) {
         this.fullName = fullName;
         this.email = email;
         this.mblNum = mblNum;
-        this.dateAffected = "";
-        this.situationFamiliar = "";
         this.weight = "";
         this.height = "";
         this.bloodType = "";
+        this.photoUrl = image;
     }
 
     public String getFullName() {
@@ -49,14 +49,6 @@ public class Patient {
         this.mblNum = mblNum;
     }
 
-    public String getSituationFamiliar() {
-        return situationFamiliar;
-    }
-
-    public void setSituationFamiliar(String situationFamiliar) {
-        this.situationFamiliar = situationFamiliar;
-    }
-
     public String getWeight() {
         return weight;
     }
@@ -73,20 +65,20 @@ public class Patient {
         this.height = height;
     }
 
-    public String getDateAffected() {
-        return dateAffected;
-    }
-
-    public void setDateAffected(String dateAffected) {
-        this.dateAffected = dateAffected;
-    }
-
     public String getBloodType() {
         return bloodType;
     }
 
     public void setBloodType(String bloodType) {
         this.bloodType = bloodType;
+    }
+
+    public Uri getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(Uri photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     @Override

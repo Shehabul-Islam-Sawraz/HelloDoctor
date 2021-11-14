@@ -21,7 +21,7 @@ public class Doctor {
         this.email = email;
         this.phoneNum = "";
         this.specialities = "";
-        this.image = null;
+        this.image = image;
         this.about = "";
     }
 

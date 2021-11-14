@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient"
     tools:context=".ui.auth.SigninFragment">
 
@@ -11,7 +12,7 @@
         android:layout_height="140dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="190dp"
-        android:src="@drawable/ic_account" />
+        app:srcCompat="@drawable/ic_account" />
 
     <EditText
         android:id="@+id/email"
@@ -25,12 +26,12 @@
         android:drawableLeft="@drawable/ic_email"
         android:ems="10"
         android:hint="  Email"
+        android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         android:textColor="@color/white"
         android:textColorHint="@color/colorMoreTransparentWhite"
-        android:textSize="22sp"
-        android:importantForAutofill="no"/>
+        android:textSize="22sp" />
 
     <EditText
         android:id="@+id/password"
@@ -46,12 +47,12 @@
         android:hint="  Password"
         android:imeActionLabel="Sign In"
         android:imeOptions="actionDone"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
         android:textColor="@color/white"
         android:textColorHint="@color/colorMoreTransparentWhite"
-        android:textSize="22sp"
-        android:importantForAutofill="no"/>
+        android:textSize="22sp" />
 
     <Button
         android:id="@+id/login"

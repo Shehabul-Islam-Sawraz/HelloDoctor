@@ -35,8 +35,8 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
 
 
     Context context;
-    List<TimeSlot> timeSlotList;
-    List<CardView> cardViewList;
+    List<TimeSlot> timeSlotList = new ArrayList<>();
+    List<CardView> cardViewList = new ArrayList<>();
     LocalBroadcastManager localBroadcastManager;
     SimpleDateFormat simpleDateFormat;
     private FirebaseDatabase database;
@@ -132,22 +132,21 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
                             appointmentInformation.setAppointmentType(Common.CurrentAppointmentType);
                             appointmentInformation.setDoctorId(Common.CurrentDoctor);
                             appointmentInformation.setDoctorName(Common.CurrentDoctorName);
-                            appointmentInformation.setChain("bookdate/"+Common.CurrentDoctor+"/"+Common.simpleFormat.format(Common.currentDate.getTime())+"/"+String.valueOf(Common.currentTimeSlot));
+                            appointmentInformation.setChain("bookdate/"+Common.CurrentDoctor.replace(".",",")+"/"+Common.simpleFormat.format(Common.currentDate.getTime())+"/"+String.valueOf(Common.currentTimeSlot));
                             appointmentInformation.setType("full");
                             appointmentInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
-                                    .append("at")
+                                    .append(" at ")
                                     .append(simpleDateFormat.format(Common.currentDate.getTime())).toString());
                             appointmentInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
 
                             TimeSlot slot = new TimeSlot();
                             slot.setSlot((long)Common.currentTimeSlot);
                             slot.setType("full");
-                            slot.setChain("Doctor/"+Common.CurrentDoctor+"/"+Common.simpleFormat.format(Common.currentDate.getTime())+"/"+String.valueOf(Common.currentTimeSlot));
+                            slot.setChain("Doctor/"+Common.CurrentDoctor.replace(".",",")+"/"+Common.simpleFormat.format(Common.currentDate.getTime())+"/"+String.valueOf(Common.currentTimeSlot));
                             appointmentInformation.setTimeSlot(slot);
 
-                            bookDateReference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(Common.simpleFormat.format(Common.currentDate.getTime())).
+                            bookDateReference.child(Common.CurrentDoctor.replace(".",",")).child(Common.simpleFormat.format(Common.currentDate.getTime())).
                                     child(String.valueOf(Common.currentTimeSlot)).setValue(appointmentInformation);
-
                             dialog.dismiss();
                         }
                     });

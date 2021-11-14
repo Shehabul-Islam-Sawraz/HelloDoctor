@@ -60,7 +60,7 @@ public class PatientAuthRepository {
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 firebaseUser.postValue(firebaseAuth.getCurrentUser());
-                Patient patient = new Patient(fullName, email, mblNum);
+                Patient patient = new Patient(fullName, email, mblNum,firebaseAuth.getCurrentUser().getPhotoUrl());
                 reference.child(email.replace(".",",")).setValue(patient);
                 Toast.makeText(application, "Sign Up successful!", Toast.LENGTH_SHORT).show();
             } else {

@@ -30,7 +30,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.doctor.DossierMedical"></activity>
+        <activity android:name=".ui.doctor.DossierMedical" />
+        <activity android:name=".ui.doctor.FicheActivity" />
+        <activity android:name=".ui.doctor.FicheInfo" />
+        <activity android:name=".ui.patient.PatientInfoActivity" />
+        <activity android:name=".ui.patient.TestActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

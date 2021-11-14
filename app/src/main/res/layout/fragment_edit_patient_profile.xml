@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:tools="http://schemas.android.com/tools"
+tools:context=".ui.patient.EditPatientProfile">
+
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#22BE87"
+    android:minHeight="?attr/actionBarSize"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:titleTextColor="#fff"
+    app:contentInsetLeft="0dp"
+    app:contentInsetStart="0dp">
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit My Profile"
+        android:textColor="@android:color/white"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:layout_gravity="center" />
+</androidx.appcompat.widget.Toolbar>
+
+
+<com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/edit_phone_patient"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:layout_marginStart="32dp"
+    android:layout_marginLeft="32dp"
+    android:layout_marginEnd="32dp"
+    android:layout_marginRight="32dp"
+    android:hint="Enter your phone"
+    android:textColorHint="#22BE87"
+    app:boxBackgroundMode="outline"
+    app:boxStrokeColor="#22BE87"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="0.358">
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/phoneText"
+        android:layout_width="match_parent"
+        android:inputType="number"
+        android:layout_height="wrap_content"
+        />
+</com.google.android.material.textfield.TextInputLayout>
+
+<com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/edit_bg"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:layout_marginStart="32dp"
+    android:layout_marginLeft="32dp"
+    android:layout_marginEnd="32dp"
+    android:layout_marginRight="32dp"
+    android:hint="Enter your Blood Group"
+    android:textColorHint="#22BE87"
+    app:boxBackgroundMode="outline"
+    app:boxStrokeColor="#22BE87"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/edit_phone_patient"
+    app:layout_constraintVertical_bias="0.05">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/bgText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+</com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/image_profile_patient"
+        android:layout_width="118dp"
+        android:layout_height="119dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_anon_user_48dp"
+        android:scaleType="center"
+        app:layout_constraintBottom_toTopOf="@+id/edit_phone_patient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/update"
+        android:layout_width="200dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
+        android:text="UPDATE PROFILE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_bg"
+        app:layout_constraintVertical_bias="0.132" />
+
+    <ImageButton
+    android:id="@+id/select_image_patient"
+    android:layout_width="29dp"
+    android:layout_height="30dp"
+    app:srcCompat="@drawable/ic_camera_alt_black_24dp"
+    app:layout_constraintBottom_toTopOf="@+id/edit_phone_patient"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/image_profile_patient"
+    app:layout_constraintVertical_bias="0.47" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

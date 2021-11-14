@@ -18,10 +18,12 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.exercise.thesis.hellodoc.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -29,6 +31,8 @@ import com.google.firebase.database.ValueEventListener;
 public class SplashscreenFragment extends Fragment {
 
     SharedPreferences sharedPreferences; // Used to store and retrieve small amounts of primitive data as key/value pairs and pull them back as and when needed.
+    FirebaseDatabase database;
+    DatabaseReference reference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,8 @@ public class SplashscreenFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("doctor");
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
         getActivity().getWindow().setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -63,13 +69,20 @@ public class SplashscreenFragment extends Fragment {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 // If there exists a user who has signed in before then check if he was signed up using an email
                 if (user != null) {
-                    String email = user.getUid();
-                    final boolean[] isDoctor = {false};
-                    FirebaseDatabase.getInstance().getReference("doctor").addListenerForSingleValueEvent(new ValueEventListener() {
+                    String email = user.getEmail();
+                    System.out.println("User id hoilo: "+email);
+                    boolean[] isDoctor = {false};
+                    /*reference.child(email).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                        @Override
+                        public void onSuccess(DataSnapshot dataSnapshot) {
+                            isDoctor[0] = true;
+                        }
+                    });*/
+                    reference.child(email.replace(".",",")).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.hasChild(email)){
-                                isDoctor[0] = true;
+                            if(snapshot.getValue()!=null){
+                                isDoctor[0]=true;
                             }
                         }
 
@@ -80,10 +93,14 @@ public class SplashscreenFragment extends Fragment {
                     });
                     //Toast.makeText(getContext(), " " + email, Toast.LENGTH_SHORT).show();
                     //If the user has no email, then it means that the user is a patient else the user is a doctor
-                    if (!isDoctor[0])
-                        Navigation.findNavController(view).navigate(R.id.action_splashscreenFragment_to_homepageFragment);
-                    else
-                        Navigation.findNavController(view).navigate(R.id.action_splashscreenFragment_to_doctorProfileFragment);
+                    new Handler(Looper.myLooper()).postDelayed(()->{
+                        if (!isDoctor[0]) {
+                            Navigation.findNavController(view).navigate(R.id.action_splashscreenFragment_to_homepageFragment);
+                        }
+                        else{
+                            Navigation.findNavController(view).navigate(R.id.action_splashscreenFragment_to_doctorProfileFragment);
+                        }
+                    },2500);
                 } else {
                     // If there exists no user in the device before, then navigate to welcome fragment to create new user
                     Navigation.findNavController(view).navigate(R.id.action_splashscreenFragment_to_welcomeFragment);

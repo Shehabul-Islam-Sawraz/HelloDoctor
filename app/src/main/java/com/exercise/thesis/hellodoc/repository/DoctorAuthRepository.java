@@ -103,7 +103,7 @@ public class DoctorAuthRepository {
                         if (task.isSuccessful()) {
                             firebaseUser.postValue(firebaseAuth.getCurrentUser());
                             Doctor doctor = new Doctor(fullName, email, address,firebaseAuth.getCurrentUser().getPhotoUrl());
-                            reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(doctor);
+                            reference.child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".",",")).setValue(doctor);
                             Toast.makeText(application, "Sign Up successful!", Toast.LENGTH_SHORT).show();
                         } else {
                             if (task.getException() instanceof FirebaseAuthUserCollisionException) {

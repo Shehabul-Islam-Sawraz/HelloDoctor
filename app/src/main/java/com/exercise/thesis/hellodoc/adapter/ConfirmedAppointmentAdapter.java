@@ -41,7 +41,7 @@ public class ConfirmedAppointmentAdapter extends FirebaseRecyclerAdapter<Appoint
         holder.patientName.setText(appointmentInformation.getPatientName());
         holder.appointmentType.setText(appointmentInformation.getAppointmentType());
 
-        String imageId = appointmentInformation.getPatientId()+".jpg"; //add a title image
+        String imageId = appointmentInformation.getPatientId().replace(".",",")+".jpg"; //add a title image
         pathReference = FirebaseStorage.getInstance().getReference().child("DoctorProfile/"+ imageId); //storage the image
         pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override

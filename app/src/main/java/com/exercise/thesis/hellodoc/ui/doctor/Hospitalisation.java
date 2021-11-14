@@ -53,12 +53,16 @@ public class Hospitalisation extends Fragment {
                 .setQuery(query, Fiche.class)
                 .build();
 
-        adapter = new HospitalisationAdapter(options);
+        FirebaseRecyclerOptions<Fiche> newList = options;
+
+        adapter = new HospitalisationAdapter(newList);
 
         RecyclerView recyclerView = result.findViewById(R.id.hospitalisationRecycleView);
+        recyclerView.getRecycledViewPool().clear();
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -71,5 +75,12 @@ public class Hospitalisation extends Fragment {
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpRecyclerView();
+        adapter.startListening();
     }
 }

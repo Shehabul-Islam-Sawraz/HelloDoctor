@@ -80,11 +80,6 @@ public class MyPatientsAdapter extends FirebaseRecyclerAdapter<Patient, MyPatien
 
                 // profileImage.setImageURI(uri);
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
         });
 
 

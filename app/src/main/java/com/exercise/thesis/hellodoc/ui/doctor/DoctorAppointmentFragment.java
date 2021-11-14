@@ -55,8 +55,8 @@ public class DoctorAppointmentFragment extends Fragment {
 
     public void setUpRecyclerView(){
         //Get the doctors by patient id
-        final String doctorID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Query query = reference.child(doctorID).orderByChild("time");
+        final String doctorID = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        Query query = reference.child(doctorID.replace(".",",")).orderByChild("time");
 
         FirebaseRecyclerOptions<AppointmentInformation> options = new FirebaseRecyclerOptions.Builder<AppointmentInformation>()
                 .setQuery(query, AppointmentInformation.class)
@@ -80,5 +80,12 @@ public class DoctorAppointmentFragment extends Fragment {
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpRecyclerView();
+        adapter.startListening();
     }
 }

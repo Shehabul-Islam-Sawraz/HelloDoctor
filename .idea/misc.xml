@@ -17,12 +17,16 @@
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/button_radius_primary_color.xml" value="0.35625" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/button_success.xml" value="0.35625" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/circle.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_anon_user_48dp.xml" value="0.35625" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_appointement.xml" value="0.3828125" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_arrow_back_black_24dp.xml" value="0.3828125" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_assignment_ind_black_24dp.xml" value="0.35625" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_camera_alt_black_24dp.xml" value="0.3828125" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_chat_black_24dp.xml" value="0.35625" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_date.xml" value="0.35625" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_local_hospital_black_24dp.xml" value="0.35208333333333336" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_person.xml" value="0.3828125" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_phone_android_black_24dp.xml" value="0.35625" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/ic_search_white.xml" value="0.3828125" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/img.xml" value="0.3828125" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/drawable/rectangle_round.xml" value="0.3828125" />
@@ -33,13 +37,18 @@
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/activity_fiche_info.xml" value="0.3088768115942029" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/activity_patient_info.xml" value="0.2971014492753623" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/activity_test.xml" value="0.302536231884058" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/confirmed_appointment_item.xml" value="0.32518115942028986" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/consultation_item.xml" value="0.3088768115942029" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/doctor_appointement_item.xml" value="0.33016304347826086" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/doctor_appointment_item.xml" value="0.33016304347826086" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/doctor_item.xml" value="0.302536231884058" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_about.xml" value="0.36666666666666664" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_about_doctor.xml" value="0.36666666666666664" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_appointment.xml" value="0.32518115942028986" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_booking_step3.xml" value="0.3229166666666667" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_booking_step_one.xml" value="0.3229166666666667" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_booking_step_two.xml" value="0.3229166666666667" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_confirmation.xml" value="0.3351449275362319" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_confirmed_appointment.xml" value="0.32518115942028986" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_consultation_page.xml" value="0.3088768115942029" />
@@ -48,20 +57,29 @@
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_doctor_profile.xml" value="0.33" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_dossier_medical.xml" value="0.31657608695652173" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_edit_doctor_profile.xml" value="0.3383838383838384" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_edit_patient_profile.xml" value="0.3179347826086957" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_homepage.xml" value="0.36666666666666664" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_hospitalisation.xml" value="0.3088768115942029" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_my_doctors.xml" value="0.3179347826086957" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_my_patients.xml" value="0.3197463768115942" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_o_t_p_verification.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_patient_appointment.xml" value="0.2740036231884058" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_patient_appointment_activity.xml" value="0.2740036231884058" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_patient_auth.xml" value="0.36666666666666664" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_patient_signin.xml" value="0.36666666666666664" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_patient_signup.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_profile_patient.xml" value="0.3179347826086957" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_search_patient.xml" value="0.302536231884058" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_signin.xml" value="0.28306159420289856" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_signup.xml" value="0.28306159420289856" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/fragment_splashscreen.xml" value="0.36666666666666664" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/hospitalisation_item.xml" value="0.3088768115942029" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/layout_time_slot.xml" value="0.3411458333333333" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/my_doctor_item.xml" value="0.3179347826086957" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/my_patients_item.xml" value="0.3220108695652174" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/nav_header.xml" value="0.36666666666666664" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/pat_request_item.xml" value="0.3179347826086957" />
+        <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/patient_appointments_item.xml" value="0.3038949275362319" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/layout/slide_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/menu/menu_bar.xml" value="0.36666666666666664" />
         <entry key="..\:/HelloDoctor/HelloDoctor/app/src/main/res/menu/navigation_bar.xml" value="0.36666666666666664" />

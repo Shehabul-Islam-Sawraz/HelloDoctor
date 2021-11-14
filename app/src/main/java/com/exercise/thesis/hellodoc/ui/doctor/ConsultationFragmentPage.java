@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.exercise.thesis.hellodoc.R;
 import com.exercise.thesis.hellodoc.adapter.ConsultationAdapter;
 import com.exercise.thesis.hellodoc.model.Fiche;
+import com.exercise.thesis.hellodoc.model.Patient;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -51,17 +52,19 @@ public class ConsultationFragmentPage extends Fragment {
     private void setUpRecyclerView() {
 
         String email_id = getActivity().getIntent().getExtras().getString("patient_email").replace(".",",");
-        Query query = reference.child(email_id).orderByChild("type").equalTo("Hospitalisation");
+        Query query = reference.child(email_id).orderByChild("type").equalTo("Consultation");
 
         FirebaseRecyclerOptions<Fiche> options = new FirebaseRecyclerOptions.Builder<Fiche>()
                 .setQuery(query, Fiche.class)
                 .build();
 
-        adapter = new ConsultationAdapter(options);
+        FirebaseRecyclerOptions<Fiche> newList = options;
 
         RecyclerView recyclerView = result.findViewById(R.id.conslutationRecycleView);
+        recyclerView.getRecycledViewPool().clear();
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        adapter = new ConsultationAdapter(newList);
         recyclerView.setAdapter(adapter);
     }
 
@@ -75,5 +78,12 @@ public class ConsultationFragmentPage extends Fragment {
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpRecyclerView();
+        adapter.startListening();
     }
 }
