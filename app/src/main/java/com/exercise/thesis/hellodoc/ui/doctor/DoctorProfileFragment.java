@@ -115,7 +115,7 @@ public class DoctorProfileFragment extends Fragment implements DatePickerDialog.
                     WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-            Navigation.findNavController(view).navigate(R.id.action_doctorProfileFragment_to_welcomeFragment);
+            Navigation.findNavController(view).navigate(R.id.action_doctorProfileFragment_to_confirmationFragment);
         });
 
         profileBtn.setOnClickListener(v->{

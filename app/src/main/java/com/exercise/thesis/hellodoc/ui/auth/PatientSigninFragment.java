@@ -54,13 +54,11 @@ public class PatientSigninFragment extends Fragment {
         isLoginComplete.observe(getViewLifecycleOwner(), aBoolean -> {
             if (aBoolean == true)
                 Navigation.findNavController(view).navigate(R.id.action_patientSigninFragment_to_homepageFragment);
-            //Toast.makeText(getActivity(), "ISTRUE OBSVR", Toast.LENGTH_SHORT).show();
         });
 
         patientAuthViewModel.getFirebaseUserMutableLiveData().observe(getViewLifecycleOwner(), firebaseUser -> {
             if (firebaseUser != null) {
                 isLoginComplete.postValue(true);
-                //Toast.makeText(getActivity(), "VIEWMODEL OBSVR", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -79,16 +77,11 @@ public class PatientSigninFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                //String error = doctorAuthViewModel.loginDataChanged(passwordEditText.getText().toString());
                 if (!emailEditText.getText().toString().isEmpty() &&
                         !passwordEditText.getText().toString().isEmpty()
-                    //&& error.equals("")
                 ) {
                     loginButton.setEnabled(true);
                 }
-                /*if (!error.equals("")) {
-                    passwordEditText.setError(error);
-                }*/
             }
         };
         passwordEditText.addTextChangedListener(afterTextChangedListener);

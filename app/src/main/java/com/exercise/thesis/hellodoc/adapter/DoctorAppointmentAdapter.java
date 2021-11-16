@@ -66,7 +66,6 @@ public class DoctorAppointmentAdapter extends FirebaseRecyclerAdapter<Appointmen
                 myDoctorAppointmentHolder.patientName.setText(appointmentInformation.getPatientName());
                 myDoctorAppointmentHolder.appointmentType.setText(appointmentInformation.getAppointmentType());
                 myDoctorAppointmentHolder.patientPhone.setText(appointmentInformation.getPatientId());
-                //System.out.println(appointmentInformation.getChain().toString());
                 break;
             }
         }

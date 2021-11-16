@@ -26,6 +26,8 @@ import androidx.navigation.Navigation;
 import com.exercise.thesis.hellodoc.R;
 import com.exercise.thesis.hellodoc.common.Common;
 import com.exercise.thesis.hellodoc.model.Patient;
+import com.exercise.thesis.hellodoc.repository.DoctorAuthRepository;
+import com.exercise.thesis.hellodoc.repository.PatientAuthRepository;
 import com.exercise.thesis.hellodoc.ui.DrawerLocker;
 import com.exercise.thesis.hellodoc.ui.doctor.DossierMedical;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -128,6 +130,7 @@ public class HomepageFragment extends Fragment {
         SignOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                PatientAuthRepository.getInstance(getActivity().getApplication()).getFirebaseAuth().signOut();
                 FirebaseAuth.getInstance().signOut();
                 Navigation.findNavController(viewThis).navigate(R.id.action_homepageFragment_to_confirmationFragment);
             }

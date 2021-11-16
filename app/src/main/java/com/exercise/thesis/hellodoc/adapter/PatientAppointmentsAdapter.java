@@ -77,28 +77,6 @@ public class PatientAppointmentsAdapter extends FirebaseRecyclerAdapter<Appointm
             }
         });
 
-
-        /*//display profile image
-        String imageId = appointmentInformation.getDoctorId().replace(".",",");
-        pathReference = FirebaseStorage.getInstance().getReference().child("DoctorProfile/" + imageId + ".jpg");
-        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.with(patientAppointmentsHolder.image.getContext())
-                        .load(uri)
-                        .placeholder(R.mipmap.ic_launcher)
-                        .fit()
-                        .centerCrop()
-                        .into(patientAppointmentsHolder.image);
-                // profileImage.setImageURI(uri);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });*/
-
         imgReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -122,7 +100,6 @@ public class PatientAppointmentsAdapter extends FirebaseRecyclerAdapter<Appointm
                                     //Toast.makeText(getActivity(), "Profile photo load error!!", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                    //Toast.makeText(getActivity(), "profile: "+profilePhoto, Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
@@ -132,7 +109,6 @@ public class PatientAppointmentsAdapter extends FirebaseRecyclerAdapter<Appointm
         });
 
         if (appointmentInformation.getAppointmentType().equals("Consultation")) {
-            //patientAppointmentsHolder.appointmentType.setBackgroundColor((patientAppointmentsHolder.type.getContext().getResources().getColor(R.color.colorPrimaryDark)));
             patientAppointmentsHolder.appointmentType.setBackground(patientAppointmentsHolder.appointmentType.getContext().getResources().getDrawable(R.drawable.button_radius_primary_color));
         }
         if (appointmentInformation.getType().equals("Accepted")) {
@@ -150,7 +126,6 @@ public class PatientAppointmentsAdapter extends FirebaseRecyclerAdapter<Appointm
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.patient_appointments_item, parent, false);
         return new PatientAppointmentsHolder(v);
     }
-
 
     class PatientAppointmentsHolder extends RecyclerView.ViewHolder {
         TextView dateAppointment;

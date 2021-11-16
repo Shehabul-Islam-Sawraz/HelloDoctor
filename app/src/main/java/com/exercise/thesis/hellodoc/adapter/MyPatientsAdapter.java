@@ -95,15 +95,6 @@ public class MyPatientsAdapter extends FirebaseRecyclerAdapter<Patient, MyPatien
         intent.putExtra("patient_email",patient.getEmail().replace(".",","));
         intent.putExtra("patient_phone", patient.getMblNum());
         medicalFolder.startActivity(intent);
-
-        /*Bundle bundle = new Bundle();
-        bundle.putString("patient_name", patient.getFullName());
-        bundle.putString("patient_email",patient.getEmail());
-        bundle.putString("patient_phone", patient.getMblNum());
-        AppCompatActivity activity = new AppCompatActivity();
-        DossierMedicalFragment fragment = new DossierMedicalFragment();
-        fragment.setArguments(bundle);
-        activity.getSupportFragmentManager().beginTransaction().replace(R.id.dossier_frame, fragment).commit();*/
     }
 
     private void openPage(Context wf,Patient p){

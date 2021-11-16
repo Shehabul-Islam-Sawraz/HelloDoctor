@@ -67,28 +67,6 @@ public class BookingStep2Fragment extends Fragment implements ITimeSlotLoadListe
     private void loadAvailableTimeSlotOfDoctor(String doctorId, final String bookDate) {
         dialog.show();
 
-        /*reference.child(Common.CurrentDoctor.replace(".",",")).child(bookDate).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for (DataSnapshot shot: snapshot.getChildren()){
-                        List<TimeSlot> timeSlots = new ArrayList<>();
-                        AppointmentInformation information = shot.getValue(AppointmentInformation.class);
-                        timeSlots.add(information.getTimeSlot());
-                    }
-                    iTimeSlotLoadListener.onTimeSlotLoadSuccess(timeSlots);
-                }
-                else{
-                    iTimeSlotLoadListener.onTimeSlotLoadEmpty();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
-
         reference.child(Common.CurrentDoctor.replace(".",",")).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -122,50 +100,6 @@ public class BookingStep2Fragment extends Fragment implements ITimeSlotLoadListe
                 }
             }
         });
-
-        /*doctorDoc = FirebaseFirestore.getInstance()
-                .collection("Doctor")
-                .document(Common.CurrentDoctor);
-        doctorDoc.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful())
-                {
-                    DocumentSnapshot documentSnapshot = task.getResult();
-                    if(documentSnapshot.exists()){
-                        CollectionReference date =FirebaseFirestore.getInstance()
-                                .collection("Doctor")
-                                .document(Common.CurrentDoctor)
-                                .collection(bookDate);
-
-                        date.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful())
-                                {
-                                    QuerySnapshot querySnapshot = task.getResult();
-                                    if (querySnapshot.isEmpty())
-                                    {
-                                        iTimeSlotLoadListener.onTimeSlotLoadEmpty();
-                                    }else {
-                                        List<TimeSlot> timeSlots = new ArrayList<>();
-                                        for (QueryDocumentSnapshot document:task.getResult())
-                                            timeSlots.add(document.toObject(TimeSlot.class));
-                                        iTimeSlotLoadListener.onTimeSlotLoadSuccess(timeSlots);
-                                    }
-
-                                }
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                iTimeSlotLoadListener.onTimeSlotLoadFailed(e.getMessage());
-                            }
-                        });
-                    }
-                }
-            }
-        });*/
     }
 
     static BookingStep2Fragment instance;
@@ -213,7 +147,6 @@ public class BookingStep2Fragment extends Fragment implements ITimeSlotLoadListe
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
         recycler_time_slot.setLayoutManager(gridLayoutManager);
         //recycler_time_slot.addItemDecoration(new SpaceI);
-
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.DATE,0);
         Calendar endDate = Calendar.getInstance();

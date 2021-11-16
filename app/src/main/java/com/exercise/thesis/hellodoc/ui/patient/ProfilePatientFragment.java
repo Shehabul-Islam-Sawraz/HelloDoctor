@@ -203,7 +203,6 @@ public class ProfilePatientFragment extends Fragment {
         System.out.println("Sending patient email: "+patient.getEmail());
         getParentFragmentManager().setFragmentResult("PatientEdit", bundle);
         Navigation.findNavController(viewThis).navigate(R.id.action_profilePatientFragment_to_editPatientProfile);
-        //Toast.makeText(getContext(), "Sorry, Edit profile is not available!!", Toast.LENGTH_SHORT).show();
     }
 }
 

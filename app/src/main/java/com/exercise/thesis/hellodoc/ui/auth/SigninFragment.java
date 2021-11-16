@@ -54,14 +54,12 @@ public class SigninFragment extends Fragment {
             else{
                 Toast.makeText(getActivity(), "Log In Failed!!", Toast.LENGTH_SHORT).show();
             }
-            //Toast.makeText(getActivity(), "ISTRUE OBSVR", Toast.LENGTH_SHORT).show();
         });
 
 
         doctorAuthViewModel.getFirebaseUserMutableLiveData().observe(getViewLifecycleOwner(), firebaseUser -> {
             if (firebaseUser != null) {
                 isLoginComplete.postValue(true);
-                //Toast.makeText(getActivity(), "VIEWMODEL OBSVR", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -85,16 +83,11 @@ public class SigninFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                //String error = doctorAuthViewModel.loginDataChanged(passwordEditText.getText().toString());
                 if (!emailEditText.getText().toString().isEmpty() &&
                         !passwordEditText.getText().toString().isEmpty()
-                        //&& error.equals("")
                     ) {
                     loginButton.setEnabled(true);
                 }
-                /*if (!error.equals("")) {
-                    passwordEditText.setError(error);
-                }*/
             }
         };
         passwordEditText.addTextChangedListener(afterTextChangedListener);

@@ -64,7 +64,6 @@ public class PatientSignupFragment extends Fragment {
 
         authViewModel.getFirebaseUserMutableLiveData().observe(getViewLifecycleOwner(), firebaseUser -> {
             if (firebaseUser != null) {
-                //Toast.makeText(getActivity(), "YEEEETTT", Toast.LENGTH_SHORT).show();
                 Navigation.findNavController(view).navigate(R.id.action_patientSignupFragment_to_homepageFragment);
             }
         });

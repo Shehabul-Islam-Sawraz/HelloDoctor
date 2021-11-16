@@ -119,18 +119,6 @@ public class DoctorCalendarFragment extends Fragment implements ITimeSlotLoadLis
     private void loadAvailableTimeSlotOfDoctor(String currentDoctor, String bookDate) {
         //alertDialog.show();
 
-        /*reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Doctor doctor = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".",",")).getValue(Doctor.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
-
         bookDateReference.child(Common.CurrentDoctor.replace(".",",")).child(bookDate).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {

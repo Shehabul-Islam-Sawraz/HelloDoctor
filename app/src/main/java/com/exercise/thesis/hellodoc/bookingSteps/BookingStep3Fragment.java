@@ -111,7 +111,7 @@ public class BookingStep3Fragment extends Fragment {
         TimeSlot slot = new TimeSlot();
         slot.setSlot((long)Common.currentTimeSlot);
         slot.setType("full");
-        slot.setChain("Doctor/"+Common.CurrentDoctor.replace(".",",")+"/"+Common.simpleFormat.format(Common.currentDate.getTime())+"/"+String.valueOf(Common.currentTimeSlot));
+        slot.setChain("bookdate/"+Common.CurrentDoctor.replace(".",",")+"/"+Common.simpleFormat.format(Common.currentDate.getTime())+"/"+String.valueOf(Common.currentTimeSlot));
         appointmentInformation.setTimeSlot(slot);
 
         bookDateReference.child(Common.CurrentDoctor.replace(".",",")).child(Common.simpleFormat.format(Common.currentDate.getTime())).
@@ -144,38 +144,6 @@ public class BookingStep3Fragment extends Fragment {
 
             }
         });
-
-        /*DocumentReference bookingDate = FirebaseFirestore.getInstance()
-                .collection("Doctor")
-                .document(Common.CurreentDoctor)
-                .collection(Common.simpleFormat.format(Common.currentDate.getTime()))
-                .document(String.valueOf(Common.currentTimeSlot));
-
-        bookingDate.set(apointementInformation)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        getActivity().finish();
-                        Toast.makeText(getContext(),"Success!",Toast.LENGTH_SHORT).show();
-                        Common.currentTimeSlot = -1;
-                        Common.currentDate = Calendar.getInstance();
-                        Common.step = 0;
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(),""+e.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                FirebaseFirestore.getInstance().collection("Doctor").document(Common.CurreentDoctor)
-                        .collection("apointementrequest").document(apointementInformation.getTime().replace("/","_")).set(apointementInformation);
-                FirebaseFirestore.getInstance().collection("Patient").document(apointementInformation.getPatientId()).collection("calendar")
-                        .document(apointementInformation.getTime().replace("/","_")).set(apointementInformation);
-
-            }
-        });*/
     }
 
     public BookingStep3Fragment() {

@@ -52,12 +52,6 @@ public class MyDoctorsFragment extends Fragment {
     public void setUpRecyclerView(){
         //Get the doctors by patient id
         final String patientID = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        /*Query query = myDoctorsRef.document(""+patientID+"")
-                .collection("MyDoctors").orderBy("name", Query.Direction.DESCENDING);
-
-        FirestoreRecyclerOptions<Doctor> options = new FirestoreRecyclerOptions.Builder<Doctor>()
-                .setQuery(query, Doctor.class)
-                .build();*/
 
         Query query = reference.child(patientID.replace(".",",")).orderByChild("fullName");
         FirebaseRecyclerOptions<Doctor> options = new FirebaseRecyclerOptions.Builder<Doctor>().
@@ -90,47 +84,3 @@ public class MyDoctorsFragment extends Fragment {
         adapter.startListening();
     }
 }
-
-
-
-    /*private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference myDoctorsRef = db.collection("Patient");
-    private MyDoctorsAdapter adapter;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_doctors);
-
-        setUpRecyclerView();
-    }
-
-    public void setUpRecyclerView(){
-        //Get the doctors by patient id
-        final String patientID = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
-        Query query = myDoctorsRef.document(""+patientID+"")
-                .collection("MyDoctors").orderBy("name", Query.Direction.DESCENDING);
-
-        FirestoreRecyclerOptions<Doctor> options = new FirestoreRecyclerOptions.Builder<Doctor>()
-                .setQuery(query, Doctor.class)
-                .build();
-
-        adapter = new MyDoctorsAdapter(options);
-        //ListMyDoctors
-        RecyclerView recyclerView = findViewById(R.id.ListMyDoctors);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        adapter.startListening();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        adapter.stopListening();
-    }*/

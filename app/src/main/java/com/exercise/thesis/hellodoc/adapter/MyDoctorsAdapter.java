@@ -58,33 +58,10 @@ public class MyDoctorsAdapter extends FirebaseRecyclerAdapter<Doctor, MyDoctorsA
             }
         });
 
-        /*String imageId = doctor.getEmail().replace(".",",")+".jpg"; //add a title image
-        pathReference = FirebaseStorage.getInstance().getReference().child("DoctorProfile/"+ imageId); //storage the image
-        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.with(myDoctorsHolder.imageViewDoctor.getContext())
-                        .load(uri)
-                        .placeholder(R.mipmap.ic_launcher)
-                        .fit()
-                        .centerCrop()
-                        .into(myDoctorsHolder.imageViewDoctor);//Image location
-
-                // profileImage.setImageURI(uri);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });*/
-
-
         imgReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String imgUrl = snapshot.child(doctor.getEmail().replace(".",",")).child("imageUri").getValue(String.class);
-                //Toast.makeText(getActivity(), "ImgUrl: "+imgUrl, Toast.LENGTH_SHORT).show();
                 if(imgUrl!=null){
                     profilePhoto = Uri.parse(imgUrl);
                     Picasso.with(myDoctorsHolder.imageViewDoctor.getContext())
@@ -103,7 +80,6 @@ public class MyDoctorsAdapter extends FirebaseRecyclerAdapter<Doctor, MyDoctorsA
                                     //Toast.makeText(getActivity(), "Profile photo load error!!", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                    //Toast.makeText(getActivity(), "profile: "+profilePhoto, Toast.LENGTH_SHORT).show();
                 }
             }
 

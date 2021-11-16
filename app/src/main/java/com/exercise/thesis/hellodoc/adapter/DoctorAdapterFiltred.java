@@ -41,8 +41,6 @@ public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFilt
     private FirebaseDatabase database;
     private DatabaseReference reference;
     private DatabaseReference imgReference;
-    /*static FirebaseFirestore db = FirebaseFirestore.getInstance();
-    static CollectionReference addRequest = db.collection("Request");*/
     private List<Doctor> mTubeList = new ArrayList<>();
     private List<Doctor> mTubeListFiltered = new ArrayList<>();
     StorageReference pathReference ;
@@ -70,27 +68,6 @@ public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFilt
         final Doctor doctor = mTubeListFiltered.get(i);
         final TextView t = doctorHolder.title ;
         doctorHolder.title.setText(doctor.getFullName());
-        /*String imageId = doctor.getEmail().replace(".",",")+".jpg";
-        pathReference = FirebaseStorage.getInstance().getReference().child("DoctorProfile/"+ imageId);
-        pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.with(doctorHolder.image.getContext())
-                        .load(uri)
-                        .placeholder(R.mipmap.ic_launcher)
-                        .fit()
-                        .centerCrop()
-                        .into(doctorHolder.image);//Image location
-
-                // profileImage.setImageURI(uri);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle any errors
-            }
-        });*/
-
 
         imgReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -131,21 +108,9 @@ public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFilt
         doctorHolder.specialities.setText("Specialities : "+doctor.getSpecialities());
         final String idPat = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         final String idDoc = doctor.getEmail();
-        // doctorHolder.image.setImageURI(Uri.parse("drawable-v24/ic_launcher_foreground.xml"));
         doctorHolder.addDoc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Map<String, Object> note = new HashMap<>();
-                note.put("id_patient", idPat);
-                note.put("id_doctor", idDoc);
-                addRequest.document().set(note)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Snackbar.make(t, "Demande envoyée", Snackbar.LENGTH_SHORT).show();
-                            }
-                        });*/
-
                 RequestNote note = new RequestNote(idPat,idDoc);
                 reference.child(System.currentTimeMillis()+"").setValue(note).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

@@ -91,8 +91,9 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
                     holder.card_time_slot.setCardBackgroundColor(context.getResources().getColor(android.R.color.darker_gray));
 
                     holder.txt_time_slot_description.setText("Full");
-                    if(slotValue.getType().equals("Checked"))
+                    if(slotValue.getType().equals("Checked")){
                         holder.txt_time_slot_description.setText("Chosen");
+                    }
                     holder.txt_time_slot_description.setTextColor(context.getResources()
                             .getColor(android.R.color.white));
                     holder.txt_time_slot.setTextColor(context.getResources().getColor(android.R.color.white));
@@ -142,7 +143,7 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
                             TimeSlot slot = new TimeSlot();
                             slot.setSlot((long)Common.currentTimeSlot);
                             slot.setType("full");
-                            slot.setChain("Doctor/"+Common.CurrentDoctor.replace(".",",")+"/"+Common.simpleFormat.format(Common.currentDate.getTime())+"/"+String.valueOf(Common.currentTimeSlot));
+                            slot.setChain("bookdate/"+Common.CurrentDoctor.replace(".",",")+"/"+Common.simpleFormat.format(Common.currentDate.getTime())+"/"+String.valueOf(Common.currentTimeSlot));
                             appointmentInformation.setTimeSlot(slot);
 
                             bookDateReference.child(Common.CurrentDoctor.replace(".",",")).child(Common.simpleFormat.format(Common.currentDate.getTime())).

@@ -72,12 +72,6 @@ public class SplashscreenFragment extends Fragment {
                     String email = user.getEmail();
                     System.out.println("User id hoilo: "+email);
                     boolean[] isDoctor = {false};
-                    /*reference.child(email).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                        @Override
-                        public void onSuccess(DataSnapshot dataSnapshot) {
-                            isDoctor[0] = true;
-                        }
-                    });*/
                     reference.child(email.replace(".",",")).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -91,7 +85,6 @@ public class SplashscreenFragment extends Fragment {
 
                         }
                     });
-                    //Toast.makeText(getContext(), " " + email, Toast.LENGTH_SHORT).show();
                     //If the user has no email, then it means that the user is a patient else the user is a doctor
                     new Handler(Looper.myLooper()).postDelayed(()->{
                         if (!isDoctor[0]) {

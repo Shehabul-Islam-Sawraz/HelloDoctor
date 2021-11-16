@@ -86,10 +86,6 @@
         android:label="Profile"
         tools:layout="@layout/fragment_doctor_profile">
         <action
-            android:id="@+id/action_doctorProfileFragment_to_welcomeFragment"
-            app:destination="@id/confirmationFragment"
-            app:popUpTo="@id/home_nav_graph" />
-        <action
             android:id="@+id/action_doctorProfileFragment_to_aboutDoctorFragment"
             app:destination="@id/aboutDoctorFragment" />
         <action
@@ -107,6 +103,9 @@
         <action
             android:id="@+id/action_doctorProfileFragment_to_doctorAppointmentFragment"
             app:destination="@id/doctorAppointmentFragment" />
+        <action
+            android:id="@+id/action_doctorProfileFragment_to_confirmationFragment"
+            app:destination="@id/confirmationFragment" />
     </fragment>
     <fragment
         android:id="@+id/homepageFragment"
