@@ -40,6 +40,7 @@ public class ConfirmedAppointmentAdapter extends FirebaseRecyclerAdapter<Appoint
         holder.dateAppointment.setText(appointmentInformation.getTime());
         holder.patientName.setText(appointmentInformation.getPatientName());
         holder.appointmentType.setText(appointmentInformation.getAppointmentType());
+        holder.charge.setText("Charge: " + appointmentInformation.getIsChargeApplicable());
 
         String imageId = appointmentInformation.getPatientId().replace(".",",")+".jpg"; //add a title image
         pathReference = FirebaseStorage.getInstance().getReference().child("DoctorProfile/"+ imageId); //storage the image
@@ -69,12 +70,14 @@ public class ConfirmedAppointmentAdapter extends FirebaseRecyclerAdapter<Appoint
         TextView patientName;
         TextView appointmentType;
         ImageView patientImage;
+        TextView charge;
         public ConfirmedAppointmentHolder(@NonNull View itemView) {
             super(itemView);
             dateAppointment = itemView.findViewById(R.id.appointement_date);
             patientName = itemView.findViewById(R.id.patient_name);
             appointmentType = itemView.findViewById(R.id.appointment_type);
             patientImage = itemView.findViewById(R.id.patient_image);
+            charge = itemView.findViewById(R.id.appointement_charge);
         }
     }
 

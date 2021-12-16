@@ -10,6 +10,7 @@
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <permission android:name="android.permission.CALL_PRIVILEGED"
         android:protectionLevel="signature|privileged" />
 
@@ -20,6 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.HelloDoc">
         <activity
             android:name=".ui.MainActivity"
@@ -35,6 +37,8 @@
         <activity android:name=".ui.doctor.FicheInfo" />
         <activity android:name=".ui.patient.PatientInfoActivity" />
         <activity android:name=".ui.patient.TestActivity" />
+
+        <receiver android:name=".notification.ReminderBroadcast"/>
 
         <meta-data
             android:name="preloaded_fonts"

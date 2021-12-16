@@ -33,7 +33,9 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFiltred.DoctorHolder2> implements Filterable {
     public static boolean specialistSearch = false;
@@ -124,11 +126,18 @@ public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFilt
         doctorHolder.appointmentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doc= doctor.getEmail();
-                Common.CurrentDoctor = doctor.getEmail();
-                Common.CurrentDoctorName = doctor.getFullName();
-                Common.CurrentPhone = doctor.getPhoneNum();
-                openPage(v.getContext());
+                int hour24hrs = Calendar.getInstance(TimeZone.getTimeZone("UTC")).get(Calendar.HOUR_OF_DAY);
+                if(hour24hrs<16){
+                    doc= doctor.getEmail();
+                    Common.CurrentDoctor = doctor.getEmail();
+                    Common.CurrentDoctorName = doctor.getFullName();
+                    Common.CurrentPhone = doctor.getPhoneNum();
+                    openPage(v.getContext());
+                }
+                else{
+                    Toast.makeText(v.getContext(), "Now hour is: " + Integer.toString(hour24hrs), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "Sorry, Appointment Booking Time Ended. Try Again Tomorrow Before 12 PM!!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

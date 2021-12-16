@@ -139,6 +139,7 @@ public class MyTimeSlotAdapter extends RecyclerView.Adapter<MyTimeSlotAdapter.My
                                     .append(" at ")
                                     .append(simpleDateFormat.format(Common.currentDate.getTime())).toString());
                             appointmentInformation.setSlot(Long.valueOf(Common.currentTimeSlot));
+                            appointmentInformation.setIsChargeApplicable("No");
 
                             TimeSlot slot = new TimeSlot();
                             slot.setSlot((long)Common.currentTimeSlot);

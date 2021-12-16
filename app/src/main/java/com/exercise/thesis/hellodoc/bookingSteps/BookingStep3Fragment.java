@@ -1,9 +1,15 @@
 package com.exercise.thesis.hellodoc.bookingSteps;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +26,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.exercise.thesis.hellodoc.R;
 import com.exercise.thesis.hellodoc.common.Common;
 import com.exercise.thesis.hellodoc.model.AppointmentInformation;
+import com.exercise.thesis.hellodoc.notification.ReminderBroadcast;
 import com.exercise.thesis.hellodoc.viewmodel.TimeSlot;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,6 +37,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.TimeZone;
 
 public class BookingStep3Fragment extends Fragment {
 
@@ -45,6 +53,8 @@ public class BookingStep3Fragment extends Fragment {
     private DatabaseReference bookDateReference;
     private DatabaseReference appointmentReference;
     private DatabaseReference patientAppointmentReference;
+    private Context thisContext;
+    private ProgressDialog progressDialog;
 
     BroadcastReceiver confirmBookingReceiver = new BroadcastReceiver() {
         @Override
@@ -62,6 +72,12 @@ public class BookingStep3Fragment extends Fragment {
         localBroadcastManager = LocalBroadcastManager.getInstance(getContext());
 
         localBroadcastManager.registerReceiver(confirmBookingReceiver,new IntentFilter(Common.KEY_CONFIRM_BOOKING));
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.thisContext = context;
     }
 
     @Override
@@ -83,7 +99,13 @@ public class BookingStep3Fragment extends Fragment {
         this.database = FirebaseDatabase.getInstance();
         this.bookDateReference = database.getReference("bookdate");
         this.appointmentReference = database.getReference("AppointmentRequest");
-        this.patientAppointmentReference = database.getReference();
+        this.patientAppointmentReference = database.getReference("PatientAppointment");
+        progressDialog = new ProgressDialog(thisContext);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Requesting your appointment!!");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setCancelable(false);
+
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,6 +123,7 @@ public class BookingStep3Fragment extends Fragment {
         appointmentInformation.setPatientId(Common.CurrentUserid);
         appointmentInformation.setChain("bookdate/"+Common.CurrentDoctor.replace(".",",")+"/"+Common.simpleFormat.format(Common.currentDate.getTime())+"/"+String.valueOf(Common.currentTimeSlot));
         appointmentInformation.setType("Checked");
+        appointmentInformation.setIsChargeApplicable("No");
         appointmentInformation.setTime(new StringBuilder(Common.convertTimeSlotToString(Common.currentTimeSlot))
                 .append(" at ")
                 .append(simpleDateFormat.format(Common.currentDate.getTime())).toString());
@@ -138,12 +161,57 @@ public class BookingStep3Fragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 patientAppointmentReference.child(appointmentInformation.getPatientId().replace(".",",")).
-                                        child("calendar").child(appointmentInformation.getTime().replace("/","_")).setValue(appointmentInformation);
+                                        child("calendar").child(appointmentInformation.getTime().replace("/","_"))
+                                        .setValue(appointmentInformation).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        callAlarm(appointmentInformation);
+                                        progressDialog.hide();
+                                    }
+                                });
                             }
                         });
 
             }
         });
+    }
+
+    private void callAlarm(AppointmentInformation appointmentInformation) {
+        Intent intent = new Intent(thisContext, ReminderBroadcast.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(thisContext,0 , intent, 0);
+        AlarmManager alarmManager = (AlarmManager) thisContext.getSystemService(Context.ALARM_SERVICE);
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        String[] time = appointmentInformation.getTime().split(" ");
+        String[] hour = time[0].split("-");
+        String[] hourMin = hour[0].split(":");
+        int hourNow = Integer.parseInt(hourMin[0]);
+        int minNow = Integer.parseInt(hourMin[1]);
+        if(minNow==0){
+            calendar.set(Calendar.HOUR_OF_DAY, hourNow-1);
+            calendar.set(Calendar.MINUTE,45);
+            calendar.set(Calendar.SECOND,1);
+        }
+        else{
+            calendar.set(Calendar.HOUR_OF_DAY, hourNow);
+            calendar.set(Calendar.MINUTE,minNow-15);
+            calendar.set(Calendar.SECOND,1);
+        }
+        //alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+(1000*10), pendingIntent);// for testing notification after 10 seconds
+    }
+
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "AppointmentNotificationChannel";
+            String description = "Next Appointment Notification Channel";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("notifyMenu", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = thisContext.getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     public BookingStep3Fragment() {

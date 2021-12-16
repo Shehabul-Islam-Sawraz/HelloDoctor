@@ -24,8 +24,10 @@ import com.exercise.thesis.hellodoc.model.Doctor;
 import com.exercise.thesis.hellodoc.model.Patient;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,6 +47,7 @@ public class DoctorAppointmentAdapter extends FirebaseRecyclerAdapter<Appointmen
     private DatabaseReference doctorReference;
     private DatabaseReference patientDoctorReference;
     private DatabaseReference appointmentReference;
+    private DatabaseReference patientAppointToday;
     private DatabaseReference bookDateSlot;
 
     public DoctorAppointmentAdapter(@NonNull FirebaseRecyclerOptions<AppointmentInformation> options) {
@@ -60,6 +63,7 @@ public class DoctorAppointmentAdapter extends FirebaseRecyclerAdapter<Appointmen
         this.doctorReference = database.getReference("doctor");
         this.patientDoctorReference = database.getReference("PatientDoctor");
         this.appointmentReference = database.getReference("appointment");
+        this.patientAppointToday = database.getReference("PatientAppointmentToday");
         while(true){
             if(appointmentReference!=null){
                 myDoctorAppointmentHolder.dateAppointment.setText(appointmentInformation.getTime());
@@ -74,7 +78,8 @@ public class DoctorAppointmentAdapter extends FirebaseRecyclerAdapter<Appointmen
             public void onClick(View v) {
                 appointmentInformation.setType("Accepted");
 
-                reference.child(appointmentInformation.getPatientId().replace(".",",")).child("calendar").child(appointmentInformation.getTime().replace("/","_")).
+                reference.child(appointmentInformation.getPatientId().replace(".",",")).child("calendar")
+                        .child(appointmentInformation.getTime().replace("/","_")).
                         setValue(appointmentInformation).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -86,6 +91,18 @@ public class DoctorAppointmentAdapter extends FirebaseRecyclerAdapter<Appointmen
                         Toast.makeText(v.getContext(), "Can't add info successfully!!", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+                String date = appointmentInformation.getTime();
+                String[] split = date.split(" ");
+
+                patientAppointToday.child(appointmentInformation.getPatientId().replace(".",",")).child("calendar")
+                        .child(split[2].replace("/","_")).child(split[0]).setValue(appointmentInformation)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+
+                            }
+                        });
 
                 bookDateSlot = database.getReference(appointmentInformation.getChain());
 

@@ -73,6 +73,24 @@
             android:textColor="#22BE87"
             android:textSize="13sp" />
 
+        <TextView
+            android:id="@+id/appointement_charge"
+            android:layout_width="101dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="17dp"
+            android:layout_marginRight="19dp"
+            android:background="@drawable/button_radius_accent_color"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="Charge: "
+            android:textColor="#fff"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

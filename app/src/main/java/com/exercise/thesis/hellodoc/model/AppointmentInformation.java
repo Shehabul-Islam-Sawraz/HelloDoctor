@@ -3,7 +3,7 @@ package com.exercise.thesis.hellodoc.model;
 import com.exercise.thesis.hellodoc.viewmodel.TimeSlot;
 
 public class AppointmentInformation {
-    private  String patientName,time,doctorId,doctorName,patientId,type,appointmentType, chain;
+    private  String patientName,time,doctorId,doctorName,patientId,type,appointmentType, chain, isChargeApplicable;
     private long slot;
     private TimeSlot timeSlot;
 
@@ -96,5 +96,13 @@ public class AppointmentInformation {
 
     public void setSlot(long slot) {
         this.slot = slot;
+    }
+
+    public String getIsChargeApplicable() {
+        return isChargeApplicable;
+    }
+
+    public void setIsChargeApplicable(String isChargeApplicable) {
+        this.isChargeApplicable = isChargeApplicable;
     }
 }
