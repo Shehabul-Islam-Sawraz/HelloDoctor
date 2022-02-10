@@ -115,31 +115,77 @@ tools:context=".ui.doctor.EditDoctorProfile">
 
 
 
-<com.google.android.material.textfield.TextInputLayout
-    android:id="@+id/edit_specialities"
-    android:layout_width="match_parent"
-    android:layout_height="45dp"
-    android:layout_marginStart="32dp"
-    android:layout_marginLeft="32dp"
-    android:layout_marginEnd="32dp"
-    android:layout_marginRight="32dp"
-    android:hint="Enter your specialities"
-    android:textColorHint="#22BE87"
-    app:boxBackgroundMode="outline"
-    app:boxStrokeColor="#22BE87"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/edit_address"
-    app:layout_constraintVertical_bias="0.07">
+<!--<com.google.android.material.textfield.TextInputLayout-->
+<!--    android:id="@+id/edit_specialities"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="45dp"-->
+<!--    android:layout_marginStart="32dp"-->
+<!--    android:layout_marginLeft="32dp"-->
+<!--    android:layout_marginEnd="32dp"-->
+<!--    android:layout_marginRight="32dp"-->
+<!--    android:hint="@string/select"-->
+<!--    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+<!--    app:helperText="@string/select"-->
+<!--    android:textColorHint="#22BE87"-->
+<!--    app:boxBackgroundMode="outline"-->
+<!--    app:boxStrokeColor="#22BE87"-->
+<!--    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--    app:layout_constraintEnd_toEndOf="parent"-->
+<!--    app:layout_constraintHorizontal_bias="0.0"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toBottomOf="@+id/edit_address"-->
+<!--    app:layout_constraintVertical_bias="0.07"-->
+<!--    >-->
+<!--    -->
+<!--    <AutoCompleteTextView-->
+<!--        android:id="@+id/specialitiesText"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:inputType="none"-->
+<!--        android:textColorHint="#22BE87"-->
+<!--        android:textColor="#22BE87"/>-->
+<!--</com.google.android.material.textfield.TextInputLayout>-->
 
-    <com.google.android.material.textfield.TextInputEditText
+    <TextView
+        android:id="@+id/textForType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose your speciality: "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_address"
+        app:layout_constraintVertical_bias="0.07"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:textSize="18sp"
+        android:textColor="#22BE87"
+        android:textStyle="bold|italic"/>
+
+    <Spinner
         android:id="@+id/specialitiesText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-</com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="45dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="#ffffff"
+        android:spinnerMode="dropdown"
+        android:textColor="#22BE87"
+        android:visibility="visible"
+        android:textColorHint="#22BE87"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="#22BE87"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textForType"
+        app:layout_constraintVertical_bias="0.07" />
 
 
 <com.google.android.material.textfield.TextInputLayout
@@ -158,7 +204,7 @@ tools:context=".ui.doctor.EditDoctorProfile">
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.0"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/edit_specialities"
+    app:layout_constraintTop_toBottomOf="@+id/specialitiesText"
     app:layout_constraintVertical_bias="0.1">
 
     <com.google.android.material.textfield.TextInputEditText

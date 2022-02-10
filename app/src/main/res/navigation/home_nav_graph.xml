@@ -116,9 +116,6 @@
             android:id="@+id/action_homepageFragment_to_patientAppointmentFragment"
             app:destination="@id/patientAppointmentFragment" />
         <action
-            android:id="@+id/action_homepageFragment_to_searchPatientFragment"
-            app:destination="@id/searchPatientFragment" />
-        <action
             android:id="@+id/action_homepageFragment_to_confirmationFragment"
             app:destination="@id/confirmationFragment" />
         <action
@@ -127,6 +124,9 @@
         <action
             android:id="@+id/action_homepageFragment_to_profilePatientFragment"
             app:destination="@id/profilePatientFragment" />
+        <action
+            android:id="@+id/action_homepageFragment_to_allCategories"
+            app:destination="@id/allCategories" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -262,6 +262,15 @@
         <action
             android:id="@+id/action_editPatientProfile_to_profilePatientFragment"
             app:destination="@id/profilePatientFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allCategories"
+        android:name="com.exercise.thesis.hellodoc.ui.patient.AllCategories"
+        android:label="fragment_all_categories"
+        tools:layout="@layout/fragment_all_categories" >
+        <action
+            android:id="@+id/action_allCategories_to_searchPatientFragment"
+            app:destination="@id/searchPatientFragment" />
     </fragment>
 
 </navigation>

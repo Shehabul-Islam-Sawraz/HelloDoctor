@@ -19,8 +19,30 @@
         <item>O+</item>
         <item>O-</item>
     </string-array>
+    <string-array name="speciality_items">
+        <item>Anesthesiologist</item>
+        <item>Cardiologist</item>
+        <item>Dentist</item>
+        <item>Dermatologist</item>
+        <item>ENT Specialist</item>
+        <item>Epidemiologist</item>
+        <item>General Practitioner</item>
+        <item>Gynecologist</item>
+        <item>Neurologist</item>
+        <item>Optometrist</item>
+        <item>Pediatrician</item>
+        <item>Plastic Surgeon</item>
+        <item>Psychiatrist</item>
+        <item>Pulmonologist</item>
+        <item>Radiologist</item>
+        <item>Rheumatologist</item>
+        <item>Surgeon</item>
+        <item>Urologist</item>
+        <item>Veterinarian</item>
+    </string-array>
     <string-array name="planets_array2">
         <item>Consultation</item>
         <item>Hospitalisation</item>
     </string-array>
+    <string name="select">Select Type</string>
 </resources>

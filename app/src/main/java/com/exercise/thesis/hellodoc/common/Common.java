@@ -47,6 +47,52 @@ public class Common {
                 return 0;
         }
     }
+
+    public static int convertSpecialityToInt(String s){
+        switch (s){
+            case "Anesthesiologist":
+                return 0;
+            case "Cardiologist":
+                return 1;
+            case "Dentist":
+                return 2;
+            case "Dermatologist":
+                return 3;
+            case "ENT Specialist":
+                return 4;
+            case "Epidemiologist":
+                return 5;
+            case "General Practitioner":
+                return 6;
+            case "Gynecologist":
+                return 7;
+            case "Neurologist":
+                return 8;
+            case "Optometrist":
+                return 9;
+            case "Pediatrician":
+                return 10;
+            case "Plastic Surgeon":
+                return 11;
+            case "Psychiatrist":
+                return 12;
+            case "Pulmonologist":
+                return 13;
+            case "Radiologist":
+                return 14;
+            case "Rheumatologist":
+                return 15;
+            case "Surgeon":
+                return 16;
+            case "Urologist":
+                return 17;
+            case "Veterinarian":
+                return 18;
+            default:
+                return 0;
+        }
+    }
+
     public static String convertTimeSlotToString(int slot) {
         switch(slot) {
             case 0:

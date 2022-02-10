@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,6 +51,7 @@ public class SearchPatientFragment extends Fragment {
     private View viewThis;
     private List<Doctor> doctorsList = new ArrayList<>();
     private DoctorAdapterFiltred adapter;
+    public String doctorType;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,13 @@ public class SearchPatientFragment extends Fragment {
         this.database = FirebaseDatabase.getInstance();
         this.reference = database.getReference("doctor");
         this.viewThis = view;
+        getParentFragmentManager().setFragmentResultListener("DoctorCategorySearch", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                doctorType = result.getString("doc_type");
+                System.out.println("Doctor type is: "+doctorType);
+            }
+        });
         configureToolbar();
         setUpRecyclerView();
     }
@@ -94,7 +103,10 @@ public class SearchPatientFragment extends Fragment {
                 if(snapshot.exists()){
                     for(DataSnapshot shot: snapshot.getChildren()){
                         //System.out.println("Ekta datasnapshot is: "+shot.getValue(Doctor.class));
-                        doctorsList.add(shot.getValue(Doctor.class));
+                        Doctor d = shot.getValue(Doctor.class);
+                        if(d.getSpecialities().equals(doctorType)) {
+                            doctorsList.add(d);
+                        }
                     }
                     adapter = new DoctorAdapterFiltred(doctorsList);
                     recyclerView.setAdapter(adapter);

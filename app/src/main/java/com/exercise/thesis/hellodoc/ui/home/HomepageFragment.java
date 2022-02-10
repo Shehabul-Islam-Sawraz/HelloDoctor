@@ -124,7 +124,7 @@ public class HomepageFragment extends Fragment {
         searchPatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(viewThis).navigate(R.id.action_homepageFragment_to_searchPatientFragment);
+                Navigation.findNavController(viewThis).navigate(R.id.action_homepageFragment_to_allCategories);
             }
         });
         SignOutBtn.setOnClickListener(new View.OnClickListener() {

@@ -28,10 +28,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.exercise.thesis.hellodoc.R;
@@ -58,6 +62,8 @@ import com.squareup.picasso.Picasso;
 
 public class EditDoctorProfile extends Fragment {
 
+    String[] types = {"Anesthesiologist","Cardiologist","Dentist","Dermatologist","ENT Specialist","Epidemiologist","General Practitioner","Gynecologist","Neurologist",
+                        "Optometrist","Pediatrician","Plastic Surgeon","Psychiatrist","Pulmonologist","Radiologist","Rheumatologist","Surgeon","Urologist","Veterinarian"};
     private static final int PICK_IMAGE_REQUEST = 1;
     private static int storagePermission = 1;
     private static final String TAG = "EditProfileDoctorActivity";
@@ -67,7 +73,6 @@ public class EditDoctorProfile extends Fragment {
     private TextInputEditText doctorName;
     private TextInputEditText doctorPhone;
     private TextInputEditText doctorAddress;
-    private TextInputEditText doctorSpe;
     private TextInputEditText doctorAbout;
     final String currentDoctorUID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
     final String doctorID = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
@@ -86,6 +91,8 @@ public class EditDoctorProfile extends Fragment {
     private ProgressDialog progressDialog;
     private ActivityResultLauncher<String> getPhoto;
     private ActivityResultLauncher<String> requestPermissionLauncher;
+    private String typeOfDoctor;
+    Spinner specialistList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -151,7 +158,22 @@ public class EditDoctorProfile extends Fragment {
         doctorName = view.findViewById(R.id.nameText);
         doctorPhone = view.findViewById(R.id.phoneText);
         doctorAddress = view.findViewById(R.id.addressText);
-        doctorSpe = view.findViewById(R.id.specialitiesText);
+        specialistList = (Spinner) view.findViewById(R.id.specialitiesText);
+        ArrayAdapter<CharSequence> adapterSpecialistList = ArrayAdapter.createFromResource(getContext(),
+                R.array.speciality_items, android.R.layout.simple_spinner_item);
+        adapterSpecialistList.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        specialistList.setAdapter(adapterSpecialistList);
+
+
+//        autoCompleteTextView = view.findViewById(R.id.specialitiesText);
+//        adapterTypes = new ArrayAdapter<String>(getContext(),R.layout.list_type_item,types);
+//        autoCompleteTextView.setAdapter(adapterTypes);
+//        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                typeOfDoctor = adapterView.getItemAtPosition(i).toString();
+//            }
+//        });
         doctorAbout = view.findViewById(R.id.aboutText);
 
         getParentFragmentManager().setFragmentResultListener("DoctorEdit", this, new FragmentResultListener() {
@@ -169,7 +191,10 @@ public class EditDoctorProfile extends Fragment {
                 doctorName.setText(current_name);
                 doctorPhone.setText(current_phone);
                 doctorAddress.setText(current_address);
-                doctorSpe.setText(current_spe);
+                // doctorSpe.setText(current_spe);
+                // autoCompleteTextView.setText(current_spe);
+                specialistList.setSelection(Common.convertSpecialityToInt(current_spe));
+
                 doctorAbout.setText(current_about);
 
                 if(!current_photo.equals("null")){
@@ -208,7 +233,8 @@ public class EditDoctorProfile extends Fragment {
                 String updateAddress = doctorAddress.getText().toString();
                 String updateName = doctorName.getText().toString();
                 String updatePhone = doctorPhone.getText().toString();
-                String updateSpe = doctorSpe.getText().toString();
+                //String updateSpe = doctorSpe.getText().toString();
+                String updateSpe = specialistList.getSelectedItem().toString();
                 String updateAbout = doctorAbout.getText().toString();
                 if(updateName==null || updateName.equals("") || updateAddress==null || updateAddress.equals("")){
                     Toast.makeText(getActivity(), "Please provide correct information!!", Toast.LENGTH_SHORT).show();

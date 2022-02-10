@@ -40,6 +40,7 @@ dependencies {
     implementation "androidx.viewpager:viewpager:1.0.0"
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation "androidx.gridlayout:gridlayout:1.0.0"
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     implementation 'androidx.navigation:navigation-fragment:2.3.5'
     implementation 'androidx.navigation:navigation-ui:2.3.5'
