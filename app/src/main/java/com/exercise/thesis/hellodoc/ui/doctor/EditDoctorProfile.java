@@ -74,6 +74,7 @@ public class EditDoctorProfile extends Fragment {
     private TextInputEditText doctorPhone;
     private TextInputEditText doctorAddress;
     private TextInputEditText doctorAbout;
+    private TextInputEditText doctorFees;
     final String currentDoctorUID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
     final String doctorID = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
     private String current_email;
@@ -158,6 +159,7 @@ public class EditDoctorProfile extends Fragment {
         doctorName = view.findViewById(R.id.nameText);
         doctorPhone = view.findViewById(R.id.phoneText);
         doctorAddress = view.findViewById(R.id.addressText);
+        doctorFees = view.findViewById((R.id.feesText));
         specialistList = (Spinner) view.findViewById(R.id.specialitiesText);
         ArrayAdapter<CharSequence> adapterSpecialistList = ArrayAdapter.createFromResource(getContext(),
                 R.array.speciality_items, android.R.layout.simple_spinner_item);
@@ -183,6 +185,7 @@ public class EditDoctorProfile extends Fragment {
                 String current_phone = result.getString("doc_phone");
                 String current_address = result.getString("doc_hos");
                 String current_photo = result.getString("doc_photo");
+                String current_fees = result.getString("doc_fees");
                 current_email = result.getString("doc_email");
                 String current_spe = result.getString("doc_specialities");
                 String current_about = result.getString("doc_about");
@@ -191,6 +194,7 @@ public class EditDoctorProfile extends Fragment {
                 doctorName.setText(current_name);
                 doctorPhone.setText(current_phone);
                 doctorAddress.setText(current_address);
+                doctorFees.setText(current_fees);
                 // doctorSpe.setText(current_spe);
                 // autoCompleteTextView.setText(current_spe);
                 specialistList.setSelection(Common.convertSpecialityToInt(current_spe));
@@ -236,6 +240,7 @@ public class EditDoctorProfile extends Fragment {
                 //String updateSpe = doctorSpe.getText().toString();
                 String updateSpe = specialistList.getSelectedItem().toString();
                 String updateAbout = doctorAbout.getText().toString();
+                String updateFees = checkFees(doctorFees.getText().toString());
                 if(updateName==null || updateName.equals("") || updateAddress==null || updateAddress.equals("")){
                     Toast.makeText(getActivity(), "Please provide correct information!!", Toast.LENGTH_SHORT).show();
                 }
@@ -249,22 +254,25 @@ public class EditDoctorProfile extends Fragment {
                     if(updateAbout==null){
                         updateAbout = "";
                     }
+                    if(updateFees==null){
+                        updateFees = "";
+                    }
                     if(uriImage!=null){
                         uploadImageToFirebase(uriImage,current_email);
                     }
-                    updateDoctorInfo(updateName, updateAddress, updatePhone,current_email,updateSpe,updateAbout);
+                    updateDoctorInfo(updateName, updateAddress, updatePhone,current_email,updateSpe,updateAbout, updateFees);
                 }
-
             }
         });
     }
 
     /* Update the doctor info in the database */
-    private void updateDoctorInfo(String name, String address, String phone, String email, String spe, String about) {
+    private void updateDoctorInfo(String name, String address, String phone, String email, String spe, String about, String fees) {
         Doctor doc = new Doctor(name,email,address,uriImage);
         doc.setAbout(about);
         doc.setPhoneNum(phone);
         doc.setSpecialities(spe);
+        doc.setFees(fees);
         reference.child(email.replace(".",",")).setValue(doc).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -381,5 +389,19 @@ public class EditDoctorProfile extends Fragment {
                 Toast.makeText(getActivity(), "Permission Denied!!", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private String checkFees(String fees){
+        int l = fees.length();
+        StringBuilder s = new StringBuilder();
+        for(int i=0;i<l;i++){
+            if((fees.charAt(i)>='a' && fees.charAt(i)<='z') || (fees.charAt(i)>='A' && fees.charAt(i)<='Z')){
+
+            }
+            else{
+                s.append(fees.charAt(i));
+            }
+        }
+        return s.toString();
     }
 }

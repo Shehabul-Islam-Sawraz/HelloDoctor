@@ -10,6 +10,7 @@ public class Doctor {
     private String specialities;
     private Uri image;
     private String about;
+    private String fees;
 
     public Doctor() {
 
@@ -23,6 +24,7 @@ public class Doctor {
         this.specialities = "";
         this.image = image;
         this.about = "";
+        this.fees = "";
     }
 
     public String getFullName() {
@@ -79,6 +81,14 @@ public class Doctor {
 
     public void setAbout(String about) {
         this.about = about;
+    }
+
+    public String getFees() {
+        return fees;
+    }
+
+    public void setFees(String fees) {
+        this.fees = fees;
     }
 
     @Override

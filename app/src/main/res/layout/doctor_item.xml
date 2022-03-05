@@ -69,7 +69,7 @@
         <Button
             android:id="@+id/appointmentBtn"
             android:layout_width="wrap_content"
-            android:layout_height="32dp"
+            android:layout_height="36dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
@@ -79,5 +79,70 @@
             android:background="@drawable/button_green"
             android:text="BOOK"
             android:textColor="#fff" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp">
+
+        <TextView
+            android:id="@+id/showAbout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginBottom="10dp"
+            android:text="About Doctor hfuihgfiubascbsyiaubcjsbciusbcjkscsbchuiscbsbcjsbcjsabnchisabcjkasncjsbcjiscsnacj"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/showFees"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/showAbout"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/roboto"
+            android:text="Fees : "
+            android:textColor="#22BE87"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/showPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/showFees"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/roboto"
+            android:text="Phone Number : "
+            android:textColor="#22BE87"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/showAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/showPhone"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/roboto"
+            android:text="Hospital : "
+            android:textColor="#22BE87"
+            android:textSize="17sp" />
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

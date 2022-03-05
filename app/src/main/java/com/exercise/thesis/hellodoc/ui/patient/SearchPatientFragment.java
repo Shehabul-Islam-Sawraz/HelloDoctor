@@ -101,10 +101,11 @@ public class SearchPatientFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 System.out.println("Snapshot is: "+snapshot);
                 if(snapshot.exists()){
+                    doctorsList.clear();
                     for(DataSnapshot shot: snapshot.getChildren()){
                         //System.out.println("Ekta datasnapshot is: "+shot.getValue(Doctor.class));
                         Doctor d = shot.getValue(Doctor.class);
-                        if(d.getSpecialities().equals(doctorType)) {
+                        if(d.getSpecialities().equals(doctorType) && !d.getFees().equals("")) {
                             doctorsList.add(d);
                         }
                     }

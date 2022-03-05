@@ -51,6 +51,7 @@ public class AboutDoctorFragment extends Fragment {
     private MaterialTextView doctorEmail;
     private MaterialTextView doctorAddress;
     private MaterialTextView doctorAbout;
+    private MaterialTextView doctorFees;
     private ImageView doctorImage;
     private FirebaseDatabase database;
     private DatabaseReference reference;
@@ -89,6 +90,7 @@ public class AboutDoctorFragment extends Fragment {
         doctorEmail = view.findViewById(R.id.doctor_email);
         doctorAddress = view.findViewById(R.id.doctor_address);
         doctorAbout = view.findViewById(R.id.doctor_about);
+        doctorFees = view.findViewById(R.id.doctor_fees);
         //AlertDialog dialog = new SpotsDialog.Builder().setContext(this).setCancelable(true).build();
         //AlertDialog dialog = new AlertDialog.Builder(getActivity()).setView(view).setCancelable(true).create();
         //dialog.show();
@@ -103,6 +105,7 @@ public class AboutDoctorFragment extends Fragment {
                 doctorEmail.setText(doctor.getEmail());
                 doctorAddress.setText(doctor.getAddress());
                 doctorAbout.setText(doctor.getAbout());
+                doctorFees.setText(doctor.getFees() + " TK");
             }
 
             @Override
@@ -209,6 +212,7 @@ public class AboutDoctorFragment extends Fragment {
         bundle.putString("doc_email",doctorEmail.getText().toString());
         bundle.putString("doc_specialities",doctorSpe.getText().toString());
         bundle.putString("doc_about",doctorAbout.getText().toString());
+        bundle.putString("doc_fees",doctorFees.getText().toString());
         getParentFragmentManager().setFragmentResult("DoctorEdit", bundle);
         Navigation.findNavController(viewThis).navigate(R.id.action_aboutDoctorFragment_to_editDoctorProfile);
     }

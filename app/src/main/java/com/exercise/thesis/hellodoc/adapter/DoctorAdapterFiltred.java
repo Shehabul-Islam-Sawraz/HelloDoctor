@@ -107,7 +107,16 @@ public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFilt
 
 
 
-        doctorHolder.specialities.setText("Specialities : "+doctor.getSpecialities());
+        doctorHolder.specialities.setText("Speciality : "+doctor.getSpecialities());
+        if(!doctor.getAbout().equals("")){
+            doctorHolder.showAbout.setText(doctor.getAbout());
+        }
+        doctorHolder.showFees.setText("Fees : " + doctor.getFees().trim() + " Tk");
+        if(!doctor.getPhoneNum().equals("")) {
+            doctorHolder.showPhone.setText("Phone Number : " + doctor.getPhoneNum());
+        }
+        doctorHolder.showAddress.setText("Hospital : " + doctor.getAddress());
+
         final String idPat = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         final String idDoc = doctor.getEmail();
         doctorHolder.addDoc.setOnClickListener(new View.OnClickListener() {
@@ -190,6 +199,10 @@ public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFilt
         Button appointmentBtn;
         TextView title;
         TextView specialities;
+        TextView showAbout;
+        TextView showFees;
+        TextView showPhone;
+        TextView showAddress;
         ImageView image;
         Button addDoc;
         Button load;
@@ -200,6 +213,10 @@ public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFilt
             specialities=itemView.findViewById(R.id.text_view_description4);
             image=itemView.findViewById(R.id.doctor_item_image);
             appointmentBtn=itemView.findViewById(R.id.appointmentBtn);
+            showAbout = itemView.findViewById(R.id.showAbout);
+            showFees = itemView.findViewById(R.id.showFees);
+            showPhone = itemView.findViewById(R.id.showPhone);
+            showAddress = itemView.findViewById(R.id.showAddress);
         }
     }
     private void openPage(Context wf){

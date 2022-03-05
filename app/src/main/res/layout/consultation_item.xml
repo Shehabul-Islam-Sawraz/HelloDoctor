@@ -86,7 +86,7 @@
                 android:maxLines="1"
                 android:text="Doctor"
                 android:textColor="#b8b8b8"
-                android:textSize="15sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/doctor_view_title"
@@ -147,21 +147,21 @@
 
             <Button
                 android:id="@+id/see_records_btn"
-                android:layout_width="80dp"
-                android:layout_height="26dp"
+                android:layout_width="140dp"
+                android:layout_height="32dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="154dp"
                 android:layout_marginLeft="154dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="33dp"
-                android:layout_marginRight="33dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp"
                 android:layout_marginBottom="14dp"
                 android:background="@drawable/button_radius_accent_color"
                 android:text="See Records"
-
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                tools:ignore="SmallSp" />
 
         </RelativeLayout>
 
