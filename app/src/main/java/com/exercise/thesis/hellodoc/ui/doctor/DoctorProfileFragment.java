@@ -92,6 +92,9 @@ public class DoctorProfileFragment extends Fragment implements DatePickerDialog.
                 //textView.setText(text);
                 if(isWelcomed==false){
                     Toast.makeText(getActivity(), "Welcome "+doctor.getFullName(), Toast.LENGTH_SHORT).show();
+                    if(doctor.getFees().equals("")){
+                        Toast.makeText(getActivity(), "Please Update Your Fees Status!!", Toast.LENGTH_SHORT).show();
+                    }
                     isWelcomed=true;
                 }
 //                System.out.println("WHY");

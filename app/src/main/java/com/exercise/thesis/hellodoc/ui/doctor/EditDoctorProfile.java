@@ -402,6 +402,6 @@ public class EditDoctorProfile extends Fragment {
                 s.append(fees.charAt(i));
             }
         }
-        return s.toString();
+        return s.toString().trim();
     }
 }

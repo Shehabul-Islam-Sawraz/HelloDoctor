@@ -101,11 +101,26 @@ public class AboutDoctorFragment extends Fragment {
                 doctor = snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".",",")).getValue(Doctor.class);
                 doctorName.setText(doctor.getFullName());
                 doctorSpe.setText(doctor.getSpecialities());
-                doctorPhone.setText(doctor.getPhoneNum());
+                if(doctor.getAbout().equals("")){
+                    doctorPhone.setText("Not Updated Yet");
+                }
+                else {
+                    doctorPhone.setText(doctor.getPhoneNum());
+                }
                 doctorEmail.setText(doctor.getEmail());
                 doctorAddress.setText(doctor.getAddress());
-                doctorAbout.setText(doctor.getAbout());
-                doctorFees.setText(doctor.getFees() + " TK");
+                if(doctor.getAbout().equals("")){
+                    doctorAbout.setText("Not Updated Yet");
+                }
+                else {
+                    doctorAbout.setText(doctor.getAbout());
+                }
+                if(doctor.getFees().equals("")){
+                    doctorFees.setText("Not Updated Yet");
+                }
+                else{
+                    doctorFees.setText(doctor.getFees() + " TK");
+                }
             }
 
             @Override

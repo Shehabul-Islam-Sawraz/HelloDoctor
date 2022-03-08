@@ -109,11 +109,19 @@ public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFilt
 
         doctorHolder.specialities.setText("Speciality : "+doctor.getSpecialities());
         if(!doctor.getAbout().equals("")){
+            doctorHolder.showAbout.setVisibility(View.VISIBLE);
             doctorHolder.showAbout.setText(doctor.getAbout());
+        }
+        else {
+            doctorHolder.showAbout.setVisibility(View.GONE);
         }
         doctorHolder.showFees.setText("Fees : " + doctor.getFees().trim() + " Tk");
         if(!doctor.getPhoneNum().equals("")) {
+            doctorHolder.showPhone.setVisibility(View.VISIBLE);
             doctorHolder.showPhone.setText("Phone Number : " + doctor.getPhoneNum());
+        }
+        else {
+            doctorHolder.showPhone.setVisibility(View.GONE);
         }
         doctorHolder.showAddress.setText("Hospital : " + doctor.getAddress());
 
