@@ -65,7 +65,7 @@ public class PatientAppointmentsAdapter extends FirebaseRecyclerAdapter<Appointm
         this.database = FirebaseDatabase.getInstance();
         this.reference = database.getReference("doctor");
         this.imgReference = database.getReference("images");
-        this.patientAppointToday = database.getReference("PatientAppointmentToday");
+        this.patientAppointToday = database.getReference("AppointmentList");
 
 
         this.patAppointReference = database.getReference("PatientAppointment");

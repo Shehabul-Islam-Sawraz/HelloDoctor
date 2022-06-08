@@ -63,7 +63,7 @@ public class DoctorAppointmentAdapter extends FirebaseRecyclerAdapter<Appointmen
         this.doctorReference = database.getReference("doctor");
         this.patientDoctorReference = database.getReference("PatientDoctor");
         this.appointmentReference = database.getReference("appointment");
-        this.patientAppointToday = database.getReference("PatientAppointmentToday");
+        this.patientAppointToday = database.getReference("AppointmentList");
         while(true){
             if(appointmentReference!=null){
                 myDoctorAppointmentHolder.dateAppointment.setText(appointmentInformation.getTime());
