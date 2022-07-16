@@ -52,6 +52,7 @@ public class AboutDoctorFragment extends Fragment {
     private MaterialTextView doctorAddress;
     private MaterialTextView doctorAbout;
     private MaterialTextView doctorFees;
+    private MaterialTextView doctorRating;
     private ImageView doctorImage;
     private FirebaseDatabase database;
     private DatabaseReference reference;
@@ -91,6 +92,7 @@ public class AboutDoctorFragment extends Fragment {
         doctorAddress = view.findViewById(R.id.doctor_address);
         doctorAbout = view.findViewById(R.id.doctor_about);
         doctorFees = view.findViewById(R.id.doctor_fees);
+        doctorRating = view.findViewById(R.id.rating_doctor);
         //AlertDialog dialog = new SpotsDialog.Builder().setContext(this).setCancelable(true).build();
         //AlertDialog dialog = new AlertDialog.Builder(getActivity()).setView(view).setCancelable(true).create();
         //dialog.show();
@@ -120,6 +122,13 @@ public class AboutDoctorFragment extends Fragment {
                 }
                 else{
                     doctorFees.setText(doctor.getFees() + " TK");
+                }
+                if(doctor.getAvgRating()=="0.0"){
+                    doctorRating.setVisibility(View.GONE);
+                }
+                else{
+                    doctorRating.setVisibility(View.VISIBLE);
+                    doctorRating.setText("Performance rate: "+doctor.getAvgRating());
                 }
             }
 
@@ -228,6 +237,8 @@ public class AboutDoctorFragment extends Fragment {
         bundle.putString("doc_specialities",doctorSpe.getText().toString());
         bundle.putString("doc_about",doctorAbout.getText().toString());
         bundle.putString("doc_fees",doctorFees.getText().toString());
+        bundle.putString("doc_avg_rating", doctor.getAvgRating());
+        bundle.putString("doc_no_rating", doctor.getNoOfRating()+"");
         getParentFragmentManager().setFragmentResult("DoctorEdit", bundle);
         Navigation.findNavController(viewThis).navigate(R.id.action_aboutDoctorFragment_to_editDoctorProfile);
     }

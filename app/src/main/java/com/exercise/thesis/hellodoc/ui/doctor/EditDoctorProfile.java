@@ -94,6 +94,7 @@ public class EditDoctorProfile extends Fragment {
     private ActivityResultLauncher<String> requestPermissionLauncher;
     private String typeOfDoctor;
     Spinner specialistList;
+    String avgRating, noOfRating;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -189,6 +190,8 @@ public class EditDoctorProfile extends Fragment {
                 current_email = result.getString("doc_email");
                 String current_spe = result.getString("doc_specialities");
                 String current_about = result.getString("doc_about");
+                avgRating = result.getString("doc_avg_rating");
+                noOfRating = result.getString("doc_no_rating");
 
                 //Set the default information in the text fields
                 doctorName.setText(current_name);
@@ -273,6 +276,8 @@ public class EditDoctorProfile extends Fragment {
         doc.setPhoneNum(phone);
         doc.setSpecialities(spe);
         doc.setFees(fees);
+        doc.setAvgRating(avgRating);
+        doc.setNoOfRating(Integer.parseInt(noOfRating));
         reference.child(email.replace(".",",")).setValue(doc).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

@@ -14,6 +14,8 @@ public class Fiche {
     private Date dateCreated;
     private String doctor;
     private Uri prescription;
+    private boolean isRated;
+    private String id;
 
     public Fiche(){
 
@@ -27,6 +29,7 @@ public class Fiche {
         this.doctor = doctor;
         this.dateCreated = date;
         this.prescription = uri;
+        this.isRated = false;
     }
 
     public String getDisease() {
@@ -82,5 +85,21 @@ public class Fiche {
 
     public void setPrescription(Uri prescription) {
         this.prescription = prescription;
+    }
+
+    public boolean isRated() {
+        return isRated;
+    }
+
+    public void setRated(boolean rated) {
+        isRated = rated;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

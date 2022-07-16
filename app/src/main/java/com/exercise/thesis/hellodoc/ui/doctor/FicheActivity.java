@@ -129,9 +129,8 @@ public class FicheActivity extends AppCompatActivity implements AdapterView.OnIt
                         .error(R.drawable.ef_image_placeholder)
                         .placeholder(R.drawable.ef_image_placeholder)
                         .into(imgPreview);
-                if(selectedImg!=null){
-                    uriImage = selectedImg.getUri();
-                }
+
+                uriImage = selectedImg.getUri();
             }catch (Exception e){
                 imgPreview.setVisibility(View.GONE);
                 addImage.setVisibility(View.VISIBLE);
@@ -217,7 +216,9 @@ public class FicheActivity extends AppCompatActivity implements AdapterView.OnIt
         }
 
         Fiche records = new Fiche(diseaseRecord, descriptionRecords, treatmentRecords, typeRecords, FirebaseAuth.getInstance().getCurrentUser().getEmail(), Calendar.getInstance().getTime(), uriUpload[0]);
-        reference.child(patient_email).child(System.currentTimeMillis()+"").setValue(records).addOnSuccessListener(new OnSuccessListener<Void>() {
+        String id = System.currentTimeMillis()+"";
+        records.setId(id);
+        reference.child(patient_email).child(id).setValue(records).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(FicheActivity.this, "Records added of "+ patient_name, Toast.LENGTH_LONG).show();

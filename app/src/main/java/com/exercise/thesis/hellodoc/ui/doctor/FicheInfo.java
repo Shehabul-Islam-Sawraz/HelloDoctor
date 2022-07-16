@@ -36,7 +36,7 @@ public class FicheInfo extends AppCompatActivity {
         if(!getIntent().getStringExtra("treatment").equals("")){
             t5.setText("Disease: "+getIntent().getStringExtra("treatment"));
         }
-        if(getIntent().getStringExtra("prescription")!=null){
+        if(getIntent().getStringExtra("prescription")!="null"){
             img.setVisibility(View.VISIBLE);
             Uri uri = Uri.parse(getIntent().getStringExtra("prescription"));
             Glide.with(FicheInfo.this)
