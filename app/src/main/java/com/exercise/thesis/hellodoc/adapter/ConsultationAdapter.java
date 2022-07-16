@@ -78,6 +78,7 @@ public class ConsultationAdapter  extends FirebaseRecyclerAdapter<Fiche,Consulta
         i.putExtra("disease",m.getDisease());
         i.putExtra("description",m.getDescription());
         i.putExtra("treatment", m.getTreatment());
+        i.putExtra("prescription", m.getPrescription().toString());
         wf.startActivity(i);
     }
 

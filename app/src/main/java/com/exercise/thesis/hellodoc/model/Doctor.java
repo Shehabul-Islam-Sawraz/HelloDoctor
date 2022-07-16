@@ -11,6 +11,8 @@ public class Doctor {
     private Uri image;
     private String about;
     private String fees;
+    private String avgRating;
+    private int noOfRating;
 
     public Doctor() {
 
@@ -89,6 +91,22 @@ public class Doctor {
 
     public void setFees(String fees) {
         this.fees = fees;
+    }
+
+    public String getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(String avgRating) {
+        this.avgRating = avgRating;
+    }
+
+    public int getNoOfRating() {
+        return noOfRating;
+    }
+
+    public void setNoOfRating(int noOfRating) {
+        this.noOfRating = noOfRating;
     }
 
     @Override

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -53,18 +54,40 @@
         android:spinnerMode="dropdown"
         android:textColor="#000000">
     </Spinner>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_gravity="center">
+        <ImageView
+            android:id="@+id/add_pres_img"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/icon_add_photo"/>
+        <ImageView
+            android:id="@+id/pres_img_preview"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="6dp"
+            android:maxHeight="300dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="0.16"
         android:layout_height="0dp"
         android:gravity="center|bottom">
-    <Button
-        android:id="@+id/button_add_records"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_green"
-        android:text="Add" />
+        <Button
+            android:id="@+id/button_add_records"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_green"
+            android:text="Add" />
     </LinearLayout>
 
 

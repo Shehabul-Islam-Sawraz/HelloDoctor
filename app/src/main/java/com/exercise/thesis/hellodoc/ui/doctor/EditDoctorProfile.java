@@ -338,7 +338,7 @@ public class EditDoctorProfile extends Fragment {
             @Override
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
                 //progressBar.setVisibility(View.VISIBLE);
-                double progressPercent = (100* snapshot.getBytesTransferred()/ snapshot.getTotalByteCount());
+                double progressPercent = (double) (100* snapshot.getBytesTransferred()/ snapshot.getTotalByteCount());
                 progressDialog.setMessage("Progress: "+ (int)progressPercent + "%");
             }
         }).addOnFailureListener(new OnFailureListener() {
