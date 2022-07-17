@@ -41,6 +41,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -103,12 +105,18 @@ public class SearchPatientFragment extends Fragment {
                 if(snapshot.exists()){
                     doctorsList.clear();
                     for(DataSnapshot shot: snapshot.getChildren()){
-                        //System.out.println("Ekta datasnapshot is: "+shot.getValue(Doctor.class));
                         Doctor d = shot.getValue(Doctor.class);
                         if(d.getSpecialities().equals(doctorType) && !d.getFees().equals("")) {
                             doctorsList.add(d);
                         }
                     }
+                    //Sorting doctors based on ratings
+                    Collections.sort(doctorsList, new Comparator<Doctor>() {
+                        @Override
+                        public int compare(Doctor d1, Doctor d2) {
+                            return d2.getAvgRating().compareTo(d1.getAvgRating());
+                        }
+                    });
                     adapter = new DoctorAdapterFiltred(doctorsList);
                     recyclerView.setAdapter(adapter);
                 }

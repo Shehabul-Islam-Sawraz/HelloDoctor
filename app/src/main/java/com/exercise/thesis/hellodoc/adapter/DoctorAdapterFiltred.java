@@ -124,6 +124,7 @@ public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFilt
             doctorHolder.showPhone.setVisibility(View.GONE);
         }
         doctorHolder.showAddress.setText("Hospital : " + doctor.getAddress());
+        doctorHolder.showRating.setText("Review : " + doctor.getAvgRating() + " (" + doctor.getNoOfRating() + ")");
 
         final String idPat = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         final String idDoc = doctor.getEmail();
@@ -211,6 +212,7 @@ public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFilt
         TextView showFees;
         TextView showPhone;
         TextView showAddress;
+        TextView showRating;
         ImageView image;
         Button addDoc;
         Button load;
@@ -225,6 +227,7 @@ public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFilt
             showFees = itemView.findViewById(R.id.showFees);
             showPhone = itemView.findViewById(R.id.showPhone);
             showAddress = itemView.findViewById(R.id.showAddress);
+            showRating = itemView.findViewById(R.id.showRating);
         }
     }
     private void openPage(Context wf){

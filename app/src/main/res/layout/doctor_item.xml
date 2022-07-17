@@ -144,5 +144,20 @@
             android:textColor="#22BE87"
             android:textSize="17sp" />
 
+        <TextView
+            android:id="@+id/showRating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/showAddress"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/roboto"
+            android:text="Review : "
+            android:textColor="#22BE87"
+            android:textSize="17sp" />
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
