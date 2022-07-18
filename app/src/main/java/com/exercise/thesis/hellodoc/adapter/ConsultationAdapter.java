@@ -20,28 +20,21 @@ import com.exercise.thesis.hellodoc.R;
 import com.exercise.thesis.hellodoc.common.Common;
 import com.exercise.thesis.hellodoc.model.Doctor;
 import com.exercise.thesis.hellodoc.model.Fiche;
-import com.exercise.thesis.hellodoc.ui.doctor.ConsultationFragmentPage;
-import com.exercise.thesis.hellodoc.ui.doctor.DossierMedical;
-import com.exercise.thesis.hellodoc.ui.doctor.FicheActivity;
 import com.exercise.thesis.hellodoc.ui.doctor.FicheInfo;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Calendar;
 
 public class ConsultationAdapter  extends FirebaseRecyclerAdapter<Fiche,ConsultationAdapter.FicheHolder> {
 
     private FirebaseDatabase database;
     private DatabaseReference reference, ficheReference;
+    private DatabaseReference imgReference;
 
     public ConsultationAdapter(@NonNull FirebaseRecyclerOptions<Fiche> options) {
         super(options);
@@ -52,6 +45,7 @@ public class ConsultationAdapter  extends FirebaseRecyclerAdapter<Fiche,Consulta
         this.database = FirebaseDatabase.getInstance();
         this.reference = database.getReference("doctor");
         this.ficheReference = database.getReference("PatientMedicalFolder");
+
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -150,7 +144,7 @@ public class ConsultationAdapter  extends FirebaseRecyclerAdapter<Fiche,Consulta
                         return;
                     }
                     //Updating fiche
-                    Fiche records = new Fiche(f.getDisease(), f.getDescription(), f.getTreatment(), f.getType(), f.getDoctor(), f.getDateCreated(), f.getPrescription());
+                    Fiche records = new Fiche(f.getDisease(), f.getDescription(), f.getTreatment(), f.getType(), f.getDoctor(), f.getDateCreated());
                     records.setRated(true);
                     String id = f.getId();
                     records.setId(id);
@@ -166,12 +160,7 @@ public class ConsultationAdapter  extends FirebaseRecyclerAdapter<Fiche,Consulta
         i.putExtra("disease",m.getDisease());
         i.putExtra("description",m.getDescription());
         i.putExtra("treatment", m.getTreatment());
-        if(m.getPrescription()==null){
-            i.putExtra("prescription","null");
-        }
-        else{
-            i.putExtra("prescription", m.getPrescription().toString());
-        }
+        i.putExtra("id", m.getId());
         wf.startActivity(i);
     }
 

@@ -27,7 +27,7 @@ public class Doctor {
         this.image = image;
         this.about = "";
         this.fees = "";
-        this.avgRating = "";
+        this.avgRating = "0.0";
         this.noOfRating = 0;
     }
 

@@ -224,10 +224,10 @@ tools:context=".ui.doctor.AboutDoctorFragment">
             android:layout_marginStart="27dp"
             android:layout_marginLeft="27dp"
             android:layout_marginTop="254dp"
-            android:textStyle="bold"
             android:text="Performance rate: "
-            android:textColor="#A09E9E"
-            android:textSize="17sp" />
+            android:textColor="#11A8B0"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
 
 </RelativeLayout>

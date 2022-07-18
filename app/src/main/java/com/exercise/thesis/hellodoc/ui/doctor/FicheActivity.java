@@ -1,6 +1,5 @@
 package com.exercise.thesis.hellodoc.ui.doctor;
 
-import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -23,7 +22,6 @@ import com.bumptech.glide.Glide;
 import com.esafirm.imagepicker.features.ImagePicker;
 import com.esafirm.imagepicker.model.Image;
 import com.exercise.thesis.hellodoc.R;
-import com.exercise.thesis.hellodoc.common.Common;
 import com.exercise.thesis.hellodoc.model.Fiche;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,7 +29,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -49,13 +46,13 @@ public class FicheActivity extends AppCompatActivity implements AdapterView.OnIt
     private Spinner recordsType;
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    private DatabaseReference imageRef;
     private StorageReference storage;
     SimpleDateFormat simpleDateFormat;
     private boolean isImageSelected = false;
     private ImageView addImage, imgPreview;
     private File compressedFile = null;
     private Uri uriImage = null;
-    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +61,7 @@ public class FicheActivity extends AppCompatActivity implements AdapterView.OnIt
         this.database = FirebaseDatabase.getInstance();
         this.reference = database.getReference("PatientMedicalFolder");
         this.storage = FirebaseStorage.getInstance().getReference("uploads");
+        this.imageRef = database.getReference("Prescription");
         disease = findViewById(R.id.disease);
         description = findViewById(R.id.disease_description);
         treatment = findViewById(R.id.disease_treatment);
@@ -71,10 +69,6 @@ public class FicheActivity extends AppCompatActivity implements AdapterView.OnIt
         simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         addImage = findViewById(R.id.add_pres_img);
         imgPreview = findViewById(R.id.pres_img_preview);
-        progressDialog = new ProgressDialog(getApplicationContext());
-        progressDialog.setTitle("Saving Medical Records...");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.setCancelable(false);
 
         addImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,42 +175,30 @@ public class FicheActivity extends AppCompatActivity implements AdapterView.OnIt
         String patient_name = getIntent().getStringExtra("patient_name");
         String patient_email = getIntent().getStringExtra("patient_email").replace(".",",");
 
-        final Uri[] uriUpload = {null};
+        String id = System.currentTimeMillis()+"";
+
         if(isImageSelected && uriImage!=null){
-            StorageReference ref = storage.child(System.currentTimeMillis() + "." + getImageType(uriImage));
-            progressDialog.show();
+            StorageReference ref = storage.child(id + "." + getImageType(uriImage));
             ref.putFile(uriImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            uriUpload[0] = uri;
+                            com.exercise.thesis.hellodoc.model.Image image = new com.exercise.thesis.hellodoc.model.Image(uri.toString());
+                            imageRef.child(id).setValue(image);
                         }
                     });
-                    //Toast.makeText(getActivity(), "Upload Successful!!", Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                    //progressBar.setVisibility(View.VISIBLE);
-                    double progressPercent = (double) (100* snapshot.getBytesTransferred()/ snapshot.getTotalByteCount());
-                    progressDialog.setMessage("Progress: "+ (int)progressPercent + "%");
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    //progressBar.setVisibility(View.INVISIBLE);
-                    progressDialog.dismiss();
-                    uriUpload[0] = null;
+                    Toast.makeText(FicheActivity.this, "Couldn't upload image!!", Toast.LENGTH_LONG).show();
                 }
             });
-
         }
 
-        Fiche records = new Fiche(diseaseRecord, descriptionRecords, treatmentRecords, typeRecords, FirebaseAuth.getInstance().getCurrentUser().getEmail(), Calendar.getInstance().getTime(), uriUpload[0]);
-        String id = System.currentTimeMillis()+"";
+        Fiche records = new Fiche(diseaseRecord, descriptionRecords, treatmentRecords, typeRecords, FirebaseAuth.getInstance().getCurrentUser().getEmail(), Calendar.getInstance().getTime());
         records.setId(id);
         reference.child(patient_email).child(id).setValue(records).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override

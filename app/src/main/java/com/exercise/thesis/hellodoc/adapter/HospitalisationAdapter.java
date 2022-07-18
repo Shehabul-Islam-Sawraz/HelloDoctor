@@ -23,19 +23,18 @@ import com.exercise.thesis.hellodoc.model.Fiche;
 import com.exercise.thesis.hellodoc.ui.doctor.FicheInfo;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentSnapshot;
 
 public class HospitalisationAdapter extends FirebaseRecyclerAdapter<Fiche,HospitalisationAdapter.FicheHolder2> {
 
     private FirebaseDatabase database;
     private DatabaseReference reference;
+    private DatabaseReference imgReference;
 
     public HospitalisationAdapter(@NonNull FirebaseRecyclerOptions<Fiche> options) {
         super(options);
@@ -45,6 +44,7 @@ public class HospitalisationAdapter extends FirebaseRecyclerAdapter<Fiche,Hospit
     protected void onBindViewHolder(@NonNull FicheHolder2 holder, int position, @NonNull final Fiche model) {
         this.database = FirebaseDatabase.getInstance();
         this.reference = database.getReference("doctor");
+        this.imgReference = database.getReference("Prescription");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -118,7 +118,10 @@ public class HospitalisationAdapter extends FirebaseRecyclerAdapter<Fiche,Hospit
                     reference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            doctor[0] = snapshot.child(f.getDoctor().replace(".",",")).getValue(Doctor.class);
+                            System.out.println("Eikhane ashche doctor khujte");
+                            Doctor doctor1 = snapshot.child(f.getDoctor().replace(".",",")).getValue(Doctor.class);
+                            doctor[0] = doctor1;
+                            System.out.println("Doctor khuja shesh");
                         }
 
                         @Override
@@ -144,7 +147,7 @@ public class HospitalisationAdapter extends FirebaseRecyclerAdapter<Fiche,Hospit
                         return;
                     }
                     //Updating fiche
-                    Fiche records = new Fiche(f.getDisease(), f.getDescription(), f.getTreatment(), f.getType(), f.getDoctor(), f.getDateCreated(), f.getPrescription());
+                    Fiche records = new Fiche(f.getDisease(), f.getDescription(), f.getTreatment(), f.getType(), f.getDoctor(), f.getDateCreated());
                     records.setRated(true);
                     String id = f.getId();
                     records.setId(id);
@@ -160,12 +163,7 @@ public class HospitalisationAdapter extends FirebaseRecyclerAdapter<Fiche,Hospit
         i.putExtra("disease",m.getDisease());
         i.putExtra("description",m.getDescription());
         i.putExtra("treatment", m.getTreatment());
-        if(m.getPrescription()==null){
-            i.putExtra("prescription","null");
-        }
-        else{
-            i.putExtra("prescription", m.getPrescription().toString());
-        }
+        i.putExtra("id", m.getId());
         wf.startActivity(i);
     }
 

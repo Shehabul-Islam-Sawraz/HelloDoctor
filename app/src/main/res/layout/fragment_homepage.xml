@@ -7,6 +7,20 @@ android:layout_height="match_parent"
 tools:context=".ui.home.HomepageFragment"
     android:id="@+id/homepageLayout">
 
+    <Button
+        android:id="@+id/easyAccess"
+        android:layout_width="95dp"
+        android:layout_height="85dp"
+        android:background="@drawable/button_home"
+        android:text="Disease"
+        android:textColor="#22BE87"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.835" />
 
     <Button
         android:id="@+id/signOutBtnPatient"
@@ -18,10 +32,10 @@ tools:context=".ui.home.HomepageFragment"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.861" />
+        app:layout_constraintVertical_bias="0.955" />
 
     <LinearLayout
     android:id="@+id/view"
@@ -87,7 +101,7 @@ tools:context=".ui.home.HomepageFragment"
         android:layout_marginTop="220dp"
         android:layout_marginBottom="98dp"
         android:background="@drawable/button_home"
-        android:text="Appointement"
+        android:text="Appointment"
         android:textColor="#22BE87"
         android:textSize="11sp"
         app:layout_constraintBottom_toTopOf="@+id/signOutBtnPatient"

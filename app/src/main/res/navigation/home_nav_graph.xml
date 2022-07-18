@@ -127,6 +127,9 @@
         <action
             android:id="@+id/action_homepageFragment_to_allCategories"
             app:destination="@id/allCategories" />
+        <action
+            android:id="@+id/action_homepageFragment_to_easyAccess2"
+            app:destination="@id/easyAccess2" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
@@ -270,6 +273,15 @@
         tools:layout="@layout/fragment_all_categories" >
         <action
             android:id="@+id/action_allCategories_to_searchPatientFragment"
+            app:destination="@id/searchPatientFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/easyAccess2"
+        android:name="com.exercise.thesis.hellodoc.ui.patient.EasyAccess"
+        android:label="fragment_easy_access"
+        tools:layout="@layout/fragment_easy_access" >
+        <action
+            android:id="@+id/action_easyAccess2_to_searchPatientFragment"
             app:destination="@id/searchPatientFragment" />
     </fragment>
 

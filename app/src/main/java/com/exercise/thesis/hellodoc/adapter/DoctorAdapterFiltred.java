@@ -124,7 +124,12 @@ public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFilt
             doctorHolder.showPhone.setVisibility(View.GONE);
         }
         doctorHolder.showAddress.setText("Hospital : " + doctor.getAddress());
-        doctorHolder.showRating.setText("Review : " + doctor.getAvgRating() + " (" + doctor.getNoOfRating() + ")");
+        if(doctor.getAvgRating()==null || doctor.getAvgRating()==null){
+            doctorHolder.showRating.setText("Review : " + "No Review Yet"+ " (" + doctor.getNoOfRating() + ")");
+        }
+        else{
+            doctorHolder.showRating.setText("Review : " + doctor.getAvgRating() + " (" + doctor.getNoOfRating() + ")");
+        }
 
         final String idPat = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         final String idDoc = doctor.getEmail();

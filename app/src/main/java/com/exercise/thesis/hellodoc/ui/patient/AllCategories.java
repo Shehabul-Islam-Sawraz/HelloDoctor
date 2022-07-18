@@ -17,8 +17,8 @@ import com.exercise.thesis.hellodoc.R;
 
 public class AllCategories extends Fragment {
 
-    private CardView Anesthesiologist,Cardiologist,Dentist,Dermatologist,ENTSpecialist,Epidemiologist,GeneralPractitioner,Rheumatologist,Veterinarian;
-    private CardView Gynecologist,Neurologist,Optometrist,Pediatrician,PlasticSurgeon,Psychiatrist,Pulmonologist,Radiologist,Surgeon,Urologist;
+    private CardView Anesthesiologist,Cardiologist,Dentist,Dermatologist,ENTSpecialist,Epidemiologist,GeneralPractitioner,Rheumatologist,Veterinarian,Endocrinologist;
+    private CardView Gynecologist,Neurologist,Optometrist,Pediatrician,PlasticSurgeon,Psychiatrist,Pulmonologist,Radiologist,Surgeon,Urologist,Gastroenterologist;
 
     public AllCategories() {
         // Required empty public constructor
@@ -68,6 +68,13 @@ public class AllCategories extends Fragment {
                 clickHandler(view);
             }
         });
+        Endocrinologist = view.findViewById(R.id.Endocrinologist);
+        Endocrinologist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickHandler(view);
+            }
+        });
         ENTSpecialist = view.findViewById(R.id.ENTSpecialist);
         ENTSpecialist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +84,13 @@ public class AllCategories extends Fragment {
         });
         Epidemiologist = view.findViewById(R.id.Epidemiologist);
         Epidemiologist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickHandler(view);
+            }
+        });
+        Gastroenterologist = view.findViewById(R.id.Gastroenterologist);
+        Gastroenterologist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 clickHandler(view);
@@ -202,6 +216,12 @@ public class AllCategories extends Fragment {
                 getParentFragmentManager().setFragmentResult("DoctorCategorySearch", bundle);
                 Navigation.findNavController(view).navigate(R.id.action_allCategories_to_searchPatientFragment);
                 break;
+            case R.id.Endocrinologist:
+                bundle = new Bundle();
+                bundle.putString("doc_type", "Endocrinologist");
+                getParentFragmentManager().setFragmentResult("DoctorCategorySearch", bundle);
+                Navigation.findNavController(view).navigate(R.id.action_allCategories_to_searchPatientFragment);
+                break;
             case R.id.ENTSpecialist:
                 bundle = new Bundle();
                 bundle.putString("doc_type", "ENT Specialist");
@@ -211,6 +231,12 @@ public class AllCategories extends Fragment {
             case R.id.Epidemiologist:
                 bundle = new Bundle();
                 bundle.putString("doc_type", "Epidemiologist");
+                getParentFragmentManager().setFragmentResult("DoctorCategorySearch", bundle);
+                Navigation.findNavController(view).navigate(R.id.action_allCategories_to_searchPatientFragment);
+                break;
+            case R.id.Gastroenterologist:
+                bundle = new Bundle();
+                bundle.putString("doc_type", "Gastroenterologist");
                 getParentFragmentManager().setFragmentResult("DoctorCategorySearch", bundle);
                 Navigation.findNavController(view).navigate(R.id.action_allCategories_to_searchPatientFragment);
                 break;
