@@ -35,6 +35,7 @@ public class ConsultationAdapter  extends FirebaseRecyclerAdapter<Fiche,Consulta
     private FirebaseDatabase database;
     private DatabaseReference reference, ficheReference;
     private DatabaseReference imgReference;
+    private Doctor dct;
 
     public ConsultationAdapter(@NonNull FirebaseRecyclerOptions<Fiche> options) {
         super(options);
@@ -51,6 +52,7 @@ public class ConsultationAdapter  extends FirebaseRecyclerAdapter<Fiche,Consulta
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Doctor doctor = snapshot.child(model.getDoctor().replace(".",",")).getValue(Doctor.class);
+                dct = doctor;
                 holder.doctor_name.setText(doctor.getFullName());
             }
 
@@ -115,17 +117,7 @@ public class ConsultationAdapter  extends FirebaseRecyclerAdapter<Fiche,Consulta
                     String sRating = String.valueOf(ratingBar.getRating());
                     //Updating doctor rating
                     final Doctor[] doctor = {null};
-                    reference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            doctor[0] = snapshot.child(f.getDoctor().replace(".",",")).getValue(Doctor.class);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
+                    doctor[0] = dct;
                     if(doctor[0]!=null){
                         Doctor doctor1 = new Doctor(doctor[0].getFullName(), doctor[0].getEmail(), doctor[0].getAddress(), doctor[0].getImage());
                         doctor1.setPhoneNum(doctor[0].getPhoneNum());
@@ -141,6 +133,7 @@ public class ConsultationAdapter  extends FirebaseRecyclerAdapter<Fiche,Consulta
                     }
                     else{
                         Toast.makeText(context, "Couldn't rate doctor successfully!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
                         return;
                     }
                     //Updating fiche
@@ -148,7 +141,8 @@ public class ConsultationAdapter  extends FirebaseRecyclerAdapter<Fiche,Consulta
                     records.setRated(true);
                     String id = f.getId();
                     records.setId(id);
-                    reference.child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".",",")).child(id).setValue(records);
+                    ficheReference.child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".",",")).child(id).setValue(records);
+                    dialog.dismiss();
                 }
             }
         });

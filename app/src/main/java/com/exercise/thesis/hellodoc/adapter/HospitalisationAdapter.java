@@ -33,8 +33,9 @@ import com.google.firebase.database.ValueEventListener;
 public class HospitalisationAdapter extends FirebaseRecyclerAdapter<Fiche,HospitalisationAdapter.FicheHolder2> {
 
     private FirebaseDatabase database;
-    private DatabaseReference reference;
+    private DatabaseReference reference, ficheReference;
     private DatabaseReference imgReference;
+    private Doctor dct;
 
     public HospitalisationAdapter(@NonNull FirebaseRecyclerOptions<Fiche> options) {
         super(options);
@@ -45,11 +46,13 @@ public class HospitalisationAdapter extends FirebaseRecyclerAdapter<Fiche,Hospit
         this.database = FirebaseDatabase.getInstance();
         this.reference = database.getReference("doctor");
         this.imgReference = database.getReference("Prescription");
+        this.ficheReference = database.getReference("PatientMedicalFolder");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Doctor doctor = snapshot.child(model.getDoctor().replace(".",",")).getValue(Doctor.class);
+                dct = doctor;
                 holder.doctor_name.setText(doctor.getFullName());
             }
 
@@ -115,20 +118,7 @@ public class HospitalisationAdapter extends FirebaseRecyclerAdapter<Fiche,Hospit
                     String sRating = String.valueOf(ratingBar.getRating());
                     //Updating doctor rating
                     final Doctor[] doctor = {null};
-                    reference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            System.out.println("Eikhane ashche doctor khujte");
-                            Doctor doctor1 = snapshot.child(f.getDoctor().replace(".",",")).getValue(Doctor.class);
-                            doctor[0] = doctor1;
-                            System.out.println("Doctor khuja shesh");
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
+                    doctor[0] = dct;
                     if(doctor[0]!=null){
                         Doctor doctor1 = new Doctor(doctor[0].getFullName(), doctor[0].getEmail(), doctor[0].getAddress(), doctor[0].getImage());
                         doctor1.setPhoneNum(doctor[0].getPhoneNum());
@@ -144,6 +134,7 @@ public class HospitalisationAdapter extends FirebaseRecyclerAdapter<Fiche,Hospit
                     }
                     else{
                         Toast.makeText(context, "Couldn't rate doctor successfully!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
                         return;
                     }
                     //Updating fiche
@@ -151,7 +142,8 @@ public class HospitalisationAdapter extends FirebaseRecyclerAdapter<Fiche,Hospit
                     records.setRated(true);
                     String id = f.getId();
                     records.setId(id);
-                    reference.child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".",",")).child(id).setValue(records);
+                    ficheReference.child(FirebaseAuth.getInstance().getCurrentUser().getEmail().replace(".",",")).child(id).setValue(records);
+                    dialog.dismiss();
                 }
             }
         });

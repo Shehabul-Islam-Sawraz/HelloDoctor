@@ -31,6 +31,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
+
 public class AboutDoctorFragment extends Fragment {
 
     private MaterialTextView doctorName;
@@ -48,6 +50,7 @@ public class AboutDoctorFragment extends Fragment {
     private View viewThis;
     private Uri profilePhoto = null;
     private Doctor doctor;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,13 +114,14 @@ public class AboutDoctorFragment extends Fragment {
                 else{
                     doctorFees.setText(doctor.getFees() + " TK");
                 }
-                if(doctor.getAvgRating()==null || doctor.getAvgRating()=="0.0"){
+                if(doctor.getAvgRating()==null || doctor.getAvgRating()=="0.00"){
                     doctorRating.setVisibility(View.VISIBLE);
                     doctorRating.setText("Performance rate: " + "No review yet");
                 }
                 else{
                     doctorRating.setVisibility(View.VISIBLE);
-                    doctorRating.setText("Performance rate: "+doctor.getAvgRating());
+                    double r = Double.parseDouble(doctor.getAvgRating());
+                    doctorRating.setText("Performance rate: "+ df.format(r));
                 }
             }
 

@@ -32,6 +32,7 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -47,7 +48,7 @@ public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFilt
     private List<Doctor> mTubeListFiltered = new ArrayList<>();
     StorageReference pathReference ;
     private Uri profilePhoto = null;
-
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public DoctorAdapterFiltred(List<Doctor> tubeList){
         mTubeList = tubeList;
@@ -124,11 +125,12 @@ public class DoctorAdapterFiltred extends RecyclerView.Adapter<DoctorAdapterFilt
             doctorHolder.showPhone.setVisibility(View.GONE);
         }
         doctorHolder.showAddress.setText("Hospital : " + doctor.getAddress());
-        if(doctor.getAvgRating()==null || doctor.getAvgRating()==null){
+        if(doctor.getAvgRating()==null || doctor.getAvgRating()=="0.00"){
             doctorHolder.showRating.setText("Review : " + "No Review Yet"+ " (" + doctor.getNoOfRating() + ")");
         }
         else{
-            doctorHolder.showRating.setText("Review : " + doctor.getAvgRating() + " (" + doctor.getNoOfRating() + ")");
+            double r = Double.parseDouble(doctor.getAvgRating());
+            doctorHolder.showRating.setText("Review : " + df.format(r) + " (" + doctor.getNoOfRating() + ")");
         }
 
         final String idPat = FirebaseAuth.getInstance().getCurrentUser().getEmail();
